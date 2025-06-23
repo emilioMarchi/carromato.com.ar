@@ -32,3 +32,63 @@ body {
   @apply text-yellow-400 decoration-yellow-400;
 }
 
+@layer utilities {
+  @keyframes carousel-slide {
+    0% {
+      opacity: 0;
+      transform: translateX(0) scale(0.8);
+      z-index: 1;
+    }
+    10% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      z-index: 10;
+    }
+    40% {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      z-index: 10;
+    }
+    50% {
+      opacity: 0;
+      transform: translateX(0) scale(0.8);
+      z-index: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(0) scale(0.8);
+      z-index: 1;
+    }
+  }
+
+  .animate-carousel-slide {
+    animation: carousel-slide 8s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .glow-light {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: blur(100px);
+    opacity: 0.25;
+    transition: transform 0.5s ease, opacity 1.5s ease;
+  }
+
+  @keyframes soft-float {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translateY(-20px) scale(1.05);
+      opacity: 0.35;
+    }
+  }
+
+  .animate-soft-float {
+    animation: soft-float 8s ease-in-out infinite;
+  }
+}
