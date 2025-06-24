@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 export function TypewriterTitle({
-  text = "",           // valor por defecto vacío
+  text = "",
   speed = 120,
   pause = 2000,
   as: Tag = "h1",
@@ -13,16 +13,35 @@ export function TypewriterTitle({
   const [isDeleting, setIsDeleting] = useState(false);
   const [index, setIndex] = useState(0);
   const hasFinished = useRef(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef(null);
 
   useEffect(() => {
-    // Validar que text sea string y no esté vacío
-    if (typeof text !== "string" || text.length === 0) {
-      return;
+    // IntersectionObserver: activa el efecto cuando el elemento es visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.5 } // se activa cuando el 50% está visible
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
     }
 
-    if (!loop && hasFinished.current) {
-      return;
-    }
+    return () => {
+      if (elementRef.current) {
+        observer.unobserve(elementRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    if (typeof text !== "string" || text.length === 0) return;
+    if (!loop && hasFinished.current) return;
 
     let timer;
 
@@ -56,12 +75,17 @@ export function TypewriterTitle({
     }
 
     return () => clearTimeout(timer);
-  }, [text, index, isDeleting, speed, pause, loop]);
+  }, [text, index, isDeleting, speed, pause, loop, isVisible]);
 
   return (
-    <Tag className={`${size} font-extrabold uppercase tracking-wide ${className}`}>
+    <Tag
+      ref={elementRef}
+      className={`${size} font-extrabold uppercase tracking-wide ${className}`}
+    >
       {displayedText}
-      {(loop || index < text.length) && <span className="animate-pulse">|</span>}
+      {(loop || index < text.length) && isVisible && (
+        <span className="animate-pulse">|</span>
+      )}
     </Tag>
   );
 }

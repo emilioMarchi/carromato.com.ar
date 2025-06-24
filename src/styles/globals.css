@@ -18,6 +18,10 @@
     --foreground: #ededed;
   }
 }
+html, body {
+  overflow-x: hidden;
+}
+
 
 body {
   background: var(--background);

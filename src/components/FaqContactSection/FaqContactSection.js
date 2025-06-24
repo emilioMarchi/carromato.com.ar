@@ -15,27 +15,49 @@ export function ContactForm() {
   };
 
   return (
-<div data-aos="fade-left" data-aos-delay="400" className="h-[450px] relative bg-black rounded-lg p-8 overflow-hidden">
-  <div className="absolute inset-0 bg-gradient-to-tr from-black via-black to-transparent opacity-70 animate-gradient" />
+    <div data-aos="fade-left" data-aos-delay="400" className="h-[450px] relative bg-black rounded-lg p-8 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-tr from-black via-black to-transparent opacity-70 animate-gradient" />
       <form onSubmit={handleSubmit} className="relative space-y-6 text-white z-10">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-1">Nombre</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Tu nombre"
-            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Tu nombre"
+            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="tu@correo.com"
-            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="tu@correo.com"
+            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
         </div>
         <div>
           <label htmlFor="message" className="block text-sm font-medium mb-1">Mensaje</label>
-          <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleChange}
+          <textarea
+            id="message"
+            name="message"
+            rows={4}
+            value={formData.message}
+            onChange={handleChange}
             placeholder="¿En qué podemos ayudarte?"
-            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          />
         </div>
-        <button type="submit"
-          className="inline-block text-white font-bold uppercase underline underline-offset-4 decoration-2 decoration-white transition-transform duration-300 hover:scale-105 hover:text-yellow-500 hover:decoration-yellow-500">
+        <button
+          type="submit"
+          className="inline-block text-white font-bold uppercase underline underline-offset-4 decoration-2 decoration-white transition-transform duration-300 hover:scale-105 hover:text-yellow-500 hover:decoration-yellow-500"
+        >
           Enviar Consulta
         </button>
       </form>
@@ -43,14 +65,11 @@ export function ContactForm() {
   );
 }
 
-export function FAQContactSection() {
+export function FAQContactSection({ faqs = [{ question: "¿Cuánto tarda un proyecto audiovisual?", answer: "El tiempo varía según la complejidad, pero generalmente entregamos en 2 a 4 semanas." },
+  { question: "¿Ofrecen servicios para redes sociales?", answer: "Sí, creamos contenido específico para diferentes plataformas como Instagram, TikTok y YouTube." },
+  { question: "¿Cómo es el proceso de contratación?", answer: "Nos contactás, definimos objetivos, hacemos un presupuesto y comenzamos la producción una vez aprobado." },
+] }) {
   const [openIndex, setOpenIndex] = useState(null);
-
-  const faqs = [
-    { question: "¿Cuánto tarda un proyecto audiovisual?", answer: "El tiempo varía según la complejidad, pero generalmente entregamos en 2 a 4 semanas." },
-    { question: "¿Ofrecen servicios para redes sociales?", answer: "Sí, creamos contenido específico para diferentes plataformas como Instagram, TikTok y YouTube." },
-    { question: "¿Cómo es el proceso de contratación?", answer: "Nos contactás, definimos objetivos, hacemos un presupuesto y comenzamos la producción una vez aprobado." },
-  ];
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -65,23 +84,36 @@ export function FAQContactSection() {
           <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div key={index} className="relative rounded-lg overflow-hidden w-full">
-                <button onClick={() => toggleFAQ(index)}
-                  className="relative flex justify-between items-center px-6 py-4 w-full bg-black  rounded-lg focus:outline-none transition-colors"
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="relative flex justify-between items-center px-6 py-4 w-full bg-black rounded-lg focus:outline-none transition-colors"
                   aria-expanded={openIndex === index}
                   aria-controls={`faq-content-${index}`}
-                  id={`faq-header-${index}`}>
+                  id={`faq-header-${index}`}
+                >
                   <span className="flex items-center text-lg font-semibold">{faq.question}</span>
-                  <svg className={`w-6 h-6 transform transition-transform duration-300 ${openIndex === index ? "rotate-90" : ""}`}
-                    fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <svg
+                    className={`w-6 h-6 transform transition-transform duration-300 ${openIndex === index ? "rotate-90" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
                   <div className="absolute inset-0 bg-gradient-to-tr from-black bg-black bg-opacity-50 to-transparent opacity-60 animate-gradient rounded-lg pointer-events-none" />
                 </button>
-                <div id={`faq-content-${index}`} role="region" aria-labelledby={`faq-header-${index}`}
+                <div
+                  id={`faq-content-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-header-${index}`}
                   className={`px-6 pb-4 text-gray-300 transition-all duration-300 overflow-hidden ${
                     openIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-                  }`} style={{ transitionProperty: "max-height, opacity" }}>
+                  }`}
+                  style={{ transitionProperty: "max-height, opacity" }}
+                >
                   <p className="pt-2">{faq.answer}</p>
                 </div>
               </div>
@@ -96,9 +128,15 @@ export function FAQContactSection() {
       {/* Animación de fondo gradient */}
       <style jsx global>{`
         @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
         }
         .animate-gradient {
           background-size: 200% 200%;

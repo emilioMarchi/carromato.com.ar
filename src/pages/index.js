@@ -24,9 +24,10 @@ export default function Home() {
       <main className="flex flex-col items-center gap-8">
         <HeroHome/>
         <DisplaySection/>
-        <PortfolioSectionGrid/>
+        <PortfolioSectionGrid title="NUESTRO TRABAJO HABLA POR NOSOTROS" description="DESCRIPCION DE LA SECCION"
+        />
         <UsSectionGrid/>
-        <FAQContactSection/>
+        <FAQContactSection/>  
       </main>
     </div>
   );
