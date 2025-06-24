@@ -15,24 +15,24 @@ export function ContactForm() {
   };
 
   return (
-    <div data-aos="fade-left" data-aos-delay="400" className="h-[450px] relative bg-gray-900 rounded-lg p-8 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-tr from-black via-gray-800 to-transparent opacity-70 animate-gradient" />
+<div data-aos="fade-left" data-aos-delay="400" className="h-[450px] relative bg-black rounded-lg p-8 overflow-hidden">
+  <div className="absolute inset-0 bg-gradient-to-tr from-black via-black to-transparent opacity-70 animate-gradient" />
       <form onSubmit={handleSubmit} className="relative space-y-6 text-white z-10">
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-1">Nombre</label>
           <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Tu nombre"
-            className="w-full px-4 py-2 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
           <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder="tu@correo.com"
-            className="w-full px-4 py-2 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
         </div>
         <div>
           <label htmlFor="message" className="block text-sm font-medium mb-1">Mensaje</label>
           <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleChange}
             placeholder="¿En qué podemos ayudarte?"
-            className="w-full px-4 py-2 bg-gray-800 bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+            className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" />
         </div>
         <button type="submit"
           className="inline-block text-white font-bold uppercase underline underline-offset-4 decoration-2 decoration-white transition-transform duration-300 hover:scale-105 hover:text-yellow-500 hover:decoration-yellow-500">
@@ -66,7 +66,7 @@ export function FAQContactSection() {
             {faqs.map((faq, index) => (
               <div key={index} className="relative rounded-lg overflow-hidden w-full">
                 <button onClick={() => toggleFAQ(index)}
-                  className="relative flex justify-between items-center px-6 py-4 w-full bg-gray-900 rounded-lg focus:outline-none transition-colors"
+                  className="relative flex justify-between items-center px-6 py-4 w-full bg-black  rounded-lg focus:outline-none transition-colors"
                   aria-expanded={openIndex === index}
                   aria-controls={`faq-content-${index}`}
                   id={`faq-header-${index}`}>
@@ -76,7 +76,7 @@ export function FAQContactSection() {
                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                   </svg>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-black via-gray-800 to-transparent opacity-60 animate-gradient rounded-lg pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black bg-black bg-opacity-50 to-transparent opacity-60 animate-gradient rounded-lg pointer-events-none" />
                 </button>
                 <div id={`faq-content-${index}`} role="region" aria-labelledby={`faq-header-${index}`}
                   className={`px-6 pb-4 text-gray-300 transition-all duration-300 overflow-hidden ${

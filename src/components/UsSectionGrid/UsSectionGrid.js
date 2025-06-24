@@ -2,10 +2,10 @@ import Link from "next/link";
 import { TypewriterTitle } from "@/helpers/TypewriterEfect";
 export function UsSectionGrid() {
   const images = [
-    "/test.jpg",
-    "/test.jpg",
-    "/test.jpg",
-    "/test.jpg",
+    "/1.jpg",
+    "/2.jpg",
+    "/3.jpg",
+    "/4.jpg",
   ];
 
   return (

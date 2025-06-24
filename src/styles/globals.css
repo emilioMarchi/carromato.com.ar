@@ -92,3 +92,43 @@ body {
     animation: soft-float 8s ease-in-out infinite;
   }
 }
+
+/* En tu CSS global o en styles.module.css (si usás CSS Modules) */
+
+.text-gradient-violet {
+  background: linear-gradient(to right, #ffffff, #a78bfa); /* blanco a violeta */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-orange {
+  background: linear-gradient(to right, #ffffff, #fb923c); /* blanco a naranja */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card-gradient {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem; /* mismo que rounded-2xl */
+  border: 1px solid transparent;
+}
+
+.card-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;   /* grosor del borde vertical */
+  height: 50%;  /* que cubra la mitad superior */
+  background: linear-gradient(180deg, #a78bfa, #fb923c); /* violeta a naranja */
+  border-top-left-radius: 1rem;
+  transition: width 0.3s ease, height 0.3s ease;
+  z-index: 10;
+}
+
+.card-gradient:hover::before {
+  width: 12px;  /* se agranda el borde */
+  height: 100%; /* cubre toda la altura */
+  background: linear-gradient(180deg, #fb923c, #a78bfa); /* colores invertidos */
+}
