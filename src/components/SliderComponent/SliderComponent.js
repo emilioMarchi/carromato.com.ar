@@ -1,116 +1,127 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { TypewriterTitle } from "@/helpers/TypewriterEfect";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function SliderComponent({ items = [] }) {
+export default function SliderComponent({ items = [], title = "", titleDirection = "left" }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const total = items.length;
 
-  // Detecta si estamos en desktop (>768px)
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
-    function handleResize() {
+    const handleResize = () => {
       setIsDesktop(window.matchMedia("(min-width: 768px)").matches);
-    }
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Avanza currentIndex para rotar cards infinitamente
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % total);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [total]);
-
-  // Ancho card fijo según breakpoint
-  const cardWidth = isDesktop ? 320 + 16 : 220 + 16; // 16px gap incluido
-
-  // Extiende items para loop infinito (3 veces)
+  const cardWidth = isDesktop ? 320 + 16 : 220 + 16;
   const extendedItems = [...items, ...items, ...items];
+  const translateX = isDesktop ? -(currentIndex + total) * cardWidth + cardWidth : 0;
 
-  // Calcula translateX para centrar card activa
-  // En desktop la card activa va en posición 1 (la segunda card visible)
-  // En móvil card activa va en posición 0 (primera visible)
-  const translateX = isDesktop
-    ? -(currentIndex + total) * cardWidth + cardWidth
-    : -currentIndex * cardWidth;
+  const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + total) % total);
+  const handleNext = () => setCurrentIndex((prev) => (prev + 1) % total);
 
   return (
-    // Contenedor full width sin max-width ni centrado
-    <div className="w-full overflow-hidden relative">
-      <div
-        className="flex gap-4"
-        style={{
-          width: extendedItems.length * cardWidth,
-          transform: `translateX(${translateX}px)`,
-          transition: "transform 0.8s ease",
-        }}
-      >
-        {extendedItems.map((item, index) => {
-          const realIndex = index % total;
-          const diff = Math.abs(realIndex - currentIndex);
-          const circularDiff = Math.min(diff, total - diff);
+    <div className="w-full overflow-hidden relative mt-12">
+      {title && (
+        <h2
+          className={`text-2xl md:text-4xl font-bold text-white mb-6 max-w-7xl mx-auto px-4 ${
+            titleDirection === "right" ? "text-right" : titleDirection === "center" ? "text-center" : "text-left"
+          }`}
+        >
+          {title}
+        </h2>
+      )}
 
-          // Zoom y opacidad para card activa
-          const scale = circularDiff === 0 ? 1.05 : 1;
-          const opacity = circularDiff === 0 ? 1 : 0.6;
-
-          return (
-            <Link
-              key={index}
-              href={`/portfolio/${item.slug}`}
-              className="relative rounded-2xl flex flex-col justify-end border border-white/20 overflow-hidden backdrop-blur-sm transition-transform duration-700 ease-in-out"
-              style={{
-                width: isDesktop ? 320 : 220,
-                aspectRatio: "16 / 9",
-                transform: `scale(${scale})`,
-                opacity,
-                transition: "transform 0.8s ease, opacity 0.8s ease",
-                flexShrink: 0,
-                marginRight: 16,
-                cursor: "pointer",
-              }}
+      <div className="relative max-w-7xl mx-auto px-4">
+        {/* Flechas arriba a los costados en desktop */}
+        {isDesktop && (
+          <div className="flex justify-between items-center mb-4">
+            <button
+              onClick={handlePrev}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
             >
-              {/* Fondo video */}
-              {item.video && (
-                <div
-                  className="absolute inset-0 w-full h-full bg-cover bg-center rounded-2xl"
-                  style={{ backgroundImage: `url(${item.video})` }}
-                />
-              )}
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+          </div>
+        )}
 
-              {/* Overlay oscuro para separar texto del video */}
-              <div className="absolute inset-0 bg-black/80 rounded-2xl z-10" />
+        <div
+          className={`flex gap-4 ${
+            isDesktop ? "" : "overflow-x-auto touch-pan-x scrollbar-hide"
+          }`}
+          style={{
+            width: isDesktop ? extendedItems.length * cardWidth : "auto",
+            transform: isDesktop ? `translateX(${translateX}px)` : undefined,
+            transition: "transform 0.8s ease",
+          }}
+        >
+          {extendedItems.map((item, index) => {
+            const realIndex = index % total;
+            const isActive = isDesktop && realIndex === currentIndex;
 
-              {/* Contenido */}
-              <div className="relative z-20 flex flex-col gap-2 px-5 pb-5 text-center">
-                <TypewriterTitle
-                  text={item.title}
-                  as="h3"
-                  size="text-lg sm:text-xl"
-                  className="font-semibold leading-[1.1] bg-gradient-to-r from-white to-violet-400 bg-clip-text text-transparent drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                  loop={false}
-                  speed={150}
-                />
-                <TypewriterTitle
-                  text={item.description}
-                  as="p"
-                  size="text-xs sm:text-sm"
-                  className="font-light text-white/80 leading-[1.2] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
-                  loop={false}
-                  speed={180}
-                />
-                <div className="mt-2 flex justify-center">
-                  <ArrowRight className="w-5 h-5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
+            const scale = isActive ? 1.05 : 1;
+            const opacity = isActive ? 1 : 0.6;
+
+            return (
+              <Link
+                key={index}
+                href={`/portfolio/${item.slug}`}
+                className="relative rounded-2xl flex flex-col justify-end border border-white/20 overflow-hidden backdrop-blur-sm transition-transform duration-700 ease-in-out"
+                style={{
+                  width: isDesktop ? 320 : 220,
+                  aspectRatio: "16 / 9",
+                  transform: `scale(${scale})`,
+                  opacity,
+                  flexShrink: 0,
+                  cursor: "pointer",
+                }}
+              >
+                {item.video && (
+                  <div
+                    className="absolute inset-0 w-full h-full bg-cover bg-center rounded-2xl"
+                    style={{ backgroundImage: `url(${item.video})` }}
+                  />
+                )}
+
+                <div className="absolute inset-0 bg-black/80 rounded-2xl z-10" />
+
+                <div className="relative z-20 flex flex-col gap-1 px-3 pb-3 text-center">
+                  <TypewriterTitle
+                    text={item.title}
+                    as="h3"
+                    size="text-sm sm:text-base"
+                    className="font-semibold leading-snug bg-gradient-to-r from-white to-violet-400 bg-clip-text text-transparent drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] line-clamp-2"
+                    loop={false}
+                    speed={140}
+                  />
+                  <TypewriterTitle
+                    text={item.description}
+                    as="p"
+                    size="text-xs sm:text-sm"
+                    className="font-light text-white/80 leading-snug drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]"
+                    loop={false}
+                    speed={180}
+                  />
+                  <div className="mt-1 flex justify-center">
+                    <ArrowRight className="w-4 h-4 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
+                  </div>
                 </div>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

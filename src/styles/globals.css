@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -135,4 +138,28 @@ body {
   width: 12px;  /* se agranda el borde */
   height: 100%; /* cubre toda la altura */
   background: linear-gradient(180deg, #fb923c, #a78bfa); /* colores invertidos */
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background: linear-gradient(270deg, #fb923c, #a78bfa, #fb923c);
+  background-size: 600% 600%;
+  animation: gradient-x 4s ease infinite;
+}
+
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

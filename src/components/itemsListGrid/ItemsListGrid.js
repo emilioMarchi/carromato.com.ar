@@ -59,7 +59,7 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
 
   // Render para otros modos ("servicios", "portfolio")
   return (
-    <div className="w-full flex flex-col items-center gap-10 mb-20">
+    <div className="w-full flex flex-col items-center gap-10 mb-20 mt-10">
       {/* Primera fila */}
       <div className="flex flex-row items-center justify-center gap-4 w-full max-w-6xl">
         <h2
@@ -125,13 +125,13 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
 }
 
 function ItemCard({ item, index, mode, gradientesTexto }) {
-  // Clase para el cursor y hover solo si NO es modo items
   const interactiveClasses =
     mode === "items" ? "" : "cursor-pointer hover:scale-105";
 
-  // Wrapper cambia según modo: Link para servicios/portfolio, div para items
-  const Wrapper = mode === "items" ? "div" : Link;
-  const wrapperProps = mode === "items" ? {} : { href: mode === "portfolio" ? `/portfolio/${item.slug}` : item.slug };
+  // Determinar wrapper según mode y presencia de slug
+  const hasLink = mode !== "items" && item.slug;
+  const Wrapper = hasLink ? Link : "div";
+  const wrapperProps = hasLink ? { href: item.slug } : {};
 
   return (
     <Wrapper
@@ -172,22 +172,21 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
 
       {/* Contenido */}
       <div className="relative z-20 flex flex-col gap-1 px-2 pb-3 text-center">
-        <>
-     
         <TypewriterTitle
-            text={item.title}
-            as="h3"
-            size={mode === "items" ? "text-sm sm:text-sm" : "text-lg sm:text-xl"}
-            className={`font-semibold leading-[1.1] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
-            loop={false}
-          />
-        </>
-        {mode !== "items" && (
+          text={item.title}
+          as="h3"
+          size={mode === "items" ? "text-sm sm:text-sm" : "text-lg sm:text-xl"}
+          className={`font-semibold leading-[1.1] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
+          loop={false}
+        />
+        {mode !== "items" && item.description && (
           <TypewriterTitle
             text={item.description}
             as="p"
             size={`${
-              mode === "portfolio" ? "text-[10px] sm:text-xs" : "text-xs sm:text-sm"
+              mode === "portfolio"
+                ? "text-[10px] sm:text-xs"
+                : "text-xs sm:text-sm"
             }`}
             className={`${
               mode === "portfolio" ? "font-light" : "font-normal"

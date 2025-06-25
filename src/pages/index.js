@@ -6,6 +6,9 @@ import { PortfolioSectionGrid } from "@/components/PortfolioSectionGrid/Portfoli
 import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
 import { DisplaySection } from "@/components/DisplaySection/DisplaySection";
 import { HeroHome } from "@/components/HeroHome.js/HeroHome";
+import FeaturedWorkBanner from "@/components/FeaturedWorkBanner/FeaturedWorkBanner";
+import { ModelServicesItems, ModelsHomeBanner } from "@/data/dataModels";
+import ItemsListGrid from "@/components/itemsListGrid/ItemsListGrid";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,8 +25,9 @@ export default function Home() {
       className={`${geistSans.className} ${geistMono.className} min-h-screen p-8 sm:p-20`}
     >
       <main className="flex flex-col items-center gap-8">
-        <HeroHome/>
-        <DisplaySection/>
+    
+        <FeaturedWorkBanner items={ModelsHomeBanner} mode="banner" interval={0}/>
+        <ItemsListGrid mode='items'  items={ModelServicesItems} />
         <PortfolioSectionGrid title="NUESTRO TRABAJO HABLA POR NOSOTROS" description="DESCRIPCION DE LA SECCION"
         />
         <UsSectionGrid/>
