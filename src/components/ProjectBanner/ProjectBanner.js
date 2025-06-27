@@ -27,13 +27,11 @@ export default function ProjectBanner({ project }) {
           </h2>
           <div className="flex gap-4 text-sm text-white/80">
             	{
-                project.technicalData.map((item,index)=>{
-                  if(item.label == 'Cliente' || item.label == 'Formato'){return}
-                  else {
-                    return(
-                      <span>{item.value}</span>
-                    )
-                  }
+                project.technicalData.map((item, index) => {
+                  if (item.label === 'Cliente' || item.label === 'Formato') return null;
+                  return (
+                    <span key={index}>{item.value}</span>
+                  );
                 })
               }
             
