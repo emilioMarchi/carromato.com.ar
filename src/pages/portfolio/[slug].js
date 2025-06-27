@@ -1,6 +1,12 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import { useRouter } from "next/router";
+import WorkDisplayAndGallery from "@/components/WorkDisplayAndGallery/WorkDisplayAndGallery";
+import {ClockIcon, MapPinIcon,UserIcon,MonitorIcon} from 'lucide-react'
+import SliderComponent from "@/components/SliderComponent/SliderComponent";
+import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
+import { ModelPortfolioItems } from "@/data/dataModels";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +18,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const projectModel = {
+  title: "Campaña Primavera",
+  background: "https://byimpetus.com/wp-content/uploads/2025/02/dreamteam-ezgif.com-optimize.gif",
+  slug:'/portfolio/campaña-primavera',
+  summary: "Producción integral de campaña audiovisual para lanzamiento de temporada Primavera 2024. Desarrollo de concepto creativo, dirección, realización y edición.",
+  technicalData: [
+    { label: "Duración", value: "3 min", icon: ClockIcon },
+    { label: "Ubicación", value: "Buenos Aires, Argentina", icon: MapPinIcon },
+    { label: "Cliente", value: "Marca X", icon: UserIcon },
+    { label: "Formato", value: "HD 1080p", icon: MonitorIcon },
+  ],
+  images: [
+    { src: "/1.jpg", alt: "Fotograma 1" },
+    { src: "/2.jpg", alt: "Backstage" },
+    { src: "/2.jpg", alt: "Escena final" },
+  ],
+}
+
+
 export default function Work() {
 
   const router = useRouter()
@@ -22,7 +47,9 @@ export default function Work() {
     >
       <main className="flex flex-col items-center gap-8">
         {/* Tu contenido va acá */}
-        <h1 className="text-3xl font-bold">Portfolio:{slug}</h1>
+        <WorkDisplayAndGallery project={projectModel} />
+        <SliderComponent title="TE PUEDEN INTERESAR..." items={ModelPortfolioItems}/>
+        <FAQContactSection/>
       </main>
     </div>
   );

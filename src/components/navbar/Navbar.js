@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, Instagram, Facebook, Youtube } from "lucide-react";
 
 const links = [
@@ -12,7 +13,7 @@ const links = [
   { href: "/nosotros", label: "Nosotros" },
 ];
 
-const activeColors = ["#f97316", "#a78bfa"]; // naranja y lila
+const activeColors = ["#f97316", "#a78bfa"];
 const gradientesHover = [
   "hover:text-orange-400 transition-colors duration-300",
   "hover:text-violet-400 transition-colors duration-300",
@@ -21,8 +22,9 @@ const gradientesHover = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [navState, setNavState] = useState("expanded"); // "expanded" | "medium" | "hidden"
+  const [navState, setNavState] = useState("expanded");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [hoveringHiddenNav, setHoveringHiddenNav] = useState(false);
 
@@ -35,14 +37,12 @@ export default function Navbar() {
       if (currentScrollY < 50) {
         setNavState("expanded");
       } else if (currentScrollY > lastScrollY) {
-        // Scrolling down
         if (scrollTimeout) clearTimeout(scrollTimeout);
         setNavState("hidden");
         scrollTimeout = setTimeout(() => {
           setNavState("medium");
         }, 300);
       } else {
-        // Scrolling up
         setNavState("expanded");
       }
 
@@ -56,13 +56,8 @@ export default function Navbar() {
     };
   }, [lastScrollY]);
 
-  // Cuando el nav está oculto, si se está haciendo hover, lo mostramos expandido
   const effectiveNavState =
     navState === "hidden" && hoveringHiddenNav ? "expanded" : navState;
-
-  // Obtener pathname para determinar el link activo
-  const pathname =
-    typeof window !== "undefined" ? window.location.pathname : "/";
 
   const heightByState = {
     expanded: 80,
@@ -72,7 +67,6 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Zona invisible para capturar hover cuando nav está oculto */}
       {navState === "hidden" && (
         <div
           onMouseEnter={() => setHoveringHiddenNav(true)}
@@ -82,7 +76,7 @@ export default function Navbar() {
             top: 0,
             left: 0,
             right: 0,
-            height: "20px", // área sensible extendida (ajustá como prefieras)
+            height: "20px",
             zIndex: 1000,
             cursor: "pointer",
           }}
@@ -103,19 +97,20 @@ export default function Navbar() {
             effectiveNavState === "hidden"
               ? `2px solid ${
                   activeColors[
-                    links.findIndex((l) => l.href === pathname) % activeColors.length
+                    links.findIndex((l) => l.href === pathname) %
+                      activeColors.length
                   ]
                 }`
               : "none",
         }}
       >
-        {/* Barra visible cuando nav no está oculto */}
         <div
           className={`max-w-7xl mx-auto flex items-center justify-between px-4 h-full transition-all duration-200 ${
-            effectiveNavState === "hidden" ? "opacity-0 pointer-events-none" : "opacity-100"
+            effectiveNavState === "hidden"
+              ? "opacity-0 pointer-events-none"
+              : "opacity-100"
           }`}
         >
-          {/* Logo */}
           <Link href="/" className="flex-shrink-0">
             <Image src="/logo.svg" alt="Carromato" width={120} height={40} />
           </Link>
@@ -162,7 +157,7 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Íconos redes Desktop */}
+          {/* Redes Desktop */}
           <div className="hidden md:flex gap-6 ml-8">
             <a
               href="https://instagram.com"
@@ -193,7 +188,7 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile icons + hamburger */}
+          {/* Mobile */}
           <div className="flex md:hidden items-center gap-4">
             <div className="flex gap-4">
               <a
@@ -225,13 +220,15 @@ export default function Navbar() {
               </a>
             </div>
 
-            <button onClick={() => setMenuOpen(!menuOpen)} aria-label="Abrir menú">
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Abrir menú"
+            >
               {menuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* Menú mobile desplegable */}
         {menuOpen && (
           <div className="md:hidden bg-black border-t border-gray-800">
             <nav className="flex flex-col gap-4 p-4">
