@@ -30,7 +30,7 @@ export default function ProjectBanner({ project }) {
                 project.technicalData.map((item, index) => {
                   if (item.label === 'Cliente' || item.label === 'Formato') return null;
                   return (
-                    <span key={index}>{item.value}</span>
+                    <span key={item.label}>{item.value}</span>
                   );
                 })
               }
