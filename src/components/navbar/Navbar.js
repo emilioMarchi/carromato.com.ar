@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -32,13 +32,10 @@ export default function Navbar() {
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const submenuTimeout = useRef(null);
 
-
   useEffect(() => {
     let scrollTimeout;
-    
     function handleScroll() {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY < 50) {
         setNavState("expanded");
       } else if (currentScrollY > lastScrollY) {
@@ -50,10 +47,8 @@ export default function Navbar() {
       } else {
         setNavState("expanded");
       }
-
       setLastScrollY(currentScrollY);
     }
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -61,9 +56,8 @@ export default function Navbar() {
     };
   }, [lastScrollY]);
 
-  const effectiveNavState =
-  navState === "hidden" && hoveringHiddenNav ? "expanded" : navState;
-  
+  const effectiveNavState = navState === "hidden" && hoveringHiddenNav ? "expanded" : navState;
+
   const heightByState = {
     expanded: 80,
     medium: 50,
@@ -74,13 +68,18 @@ export default function Navbar() {
     const clean = slug.split("/").pop().replace(/-/g, " ");
     return clean.charAt(0).toUpperCase() + clean.slice(1);
   }
-  
-  const currentSectionIndex = pathname
+
+  const currentSectionIndex = typeof pathname === "string"
     ? links.findIndex((l) => pathname.startsWith(l.href))
     : 0;
-    const currentColor = activeColors[currentSectionIndex % activeColors.length];
 
-    if (pathname === "/") return null;
+  const currentColor = activeColors[currentSectionIndex % activeColors.length];
+
+  // 👉 Condición para no renderizar el Navbar en la home
+  if (typeof pathname !== "string" || pathname === "/") {
+    return null;
+  }
+
   return (
     <>
       {navState === "hidden" && (
@@ -101,22 +100,12 @@ export default function Navbar() {
       )}
 
       <header
-        onMouseEnter={() => {
-          if (navState === "hidden") setHoveringHiddenNav(true);
-        }}
-        onMouseLeave={() => {
-          if (navState === "hidden") setHoveringHiddenNav(false);
-        }}
+        onMouseEnter={() => { if (navState === "hidden") setHoveringHiddenNav(true); }}
+        onMouseLeave={() => { if (navState === "hidden") setHoveringHiddenNav(false); }}
         className="fixed top-0 left-0 w-full z-50 bg-black text-white transition-all duration-200 overflow-visible shadow-md"
         style={{ height: heightByState[effectiveNavState] }}
       >
-        <div
-          className={`max-w-7xl mx-auto flex items-center justify-between px-4 h-full transition-all duration-200 ${
-            effectiveNavState === "hidden"
-              ? "opacity-0 pointer-events-none"
-              : "opacity-100"
-          }`}
-        >
+        <div className={`max-w-7xl mx-auto flex items-center justify-between px-4 h-full transition-all duration-200 ${effectiveNavState === "hidden" ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
           <Link href="/" className="flex-shrink-0">
             <Image src="/logo.svg" alt="Carromato" width={120} height={40} />
           </Link>
@@ -124,15 +113,14 @@ export default function Navbar() {
           <nav className="hidden md:flex flex-1 justify-center gap-8 items-center text-sm tracking-wide text-gray-300 relative">
             {links.map((link, i) => {
               const isActive =
-                pathname === link.href || pathname.startsWith(link.href + "/");
+                typeof pathname === "string" &&
+                (pathname === link.href || pathname.startsWith(link.href + "/"));
+
               const activeColor = activeColors[i % activeColors.length];
-              const hasSubmenu =
-                link.label === "Servicios" || link.label === "Portfolio";
+              const hasSubmenu = link.label === "Servicios" || link.label === "Portfolio";
 
               return (
-                <div
-                  key={link.href}
-                  className="relative flex flex-col items-center"
+                <div key={link.href} className="relative flex flex-col items-center"
                   onMouseEnter={() => {
                     clearTimeout(submenuTimeout.current);
                     setOpenSubmenu(hasSubmenu ? link.label : null);
@@ -143,13 +131,8 @@ export default function Navbar() {
                     }, 250);
                   }}
                 >
-                  <Link
-                    href={link.href}
-                    className={`relative transition font-light flex items-center gap-1 ${
-                      isActive
-                        ? "font-extrabold"
-                        : gradientesHover[i % gradientesHover.length]
-                    } hover:font-semibold`}
+                  <Link href={link.href}
+                    className={`relative transition font-light flex items-center gap-1 ${isActive ? "font-extrabold" : gradientesHover[i % gradientesHover.length]} hover:font-semibold`}
                     style={{
                       paddingBottom: "4px",
                       color: isActive ? activeColor : undefined,
@@ -174,8 +157,7 @@ export default function Navbar() {
                   </Link>
 
                   {hasSubmenu && openSubmenu === link.label && (
-                    <div
-                      className="absolute top-full mt-2 w-52 bg-black border border-white/10 rounded-lg shadow-lg p-2 flex flex-col z-50"
+                    <div className="absolute top-full mt-2 w-52 bg-black border border-white/10 rounded-lg shadow-lg p-2 flex flex-col z-50"
                       onMouseEnter={() => clearTimeout(submenuTimeout.current)}
                       onMouseLeave={() => {
                         submenuTimeout.current = setTimeout(() => {
@@ -183,23 +165,12 @@ export default function Navbar() {
                         }, 250);
                       }}
                     >
-                      {(link.label === "Servicios"
-                        ? ModelServicesItems
-                        : ModelPortfolioItems
-                      ).map((item) => {
+                      {(link.label === "Servicios" ? ModelServicesItems : ModelPortfolioItems).map((item) => {
                         const isSubActive = pathname === item.slug;
                         return (
-                          <Link
-                            key={item.slug}
-                            href={item.slug}
-                            className={`block px-3 py-2 rounded text-sm font-medium transition-all duration-200 ${
-                              isSubActive
-                                ? `font-bold`
-                                : "text-gray-300 hover:text-orange-400"
-                            }`}
-                            style={{
-                              color: isSubActive ? activeColor : undefined,
-                            }}
+                          <Link key={item.slug} href={item.slug}
+                            className={`block px-3 py-2 rounded text-sm font-medium transition-all duration-200 ${isSubActive ? `font-bold` : "text-gray-300 hover:text-orange-400"}`}
+                            style={{ color: isSubActive ? activeColor : undefined }}
                           >
                             {formatSlug(item.slug)}
                           </Link>
@@ -213,33 +184,9 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden md:flex gap-6 ml-8">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="hover:text-orange-400 transition-colors duration-300"
-            >
-              <Instagram size={20} />
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="hover:text-violet-400 transition-colors duration-300"
-            >
-              <Facebook size={20} />
-            </a>
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-              className="hover:text-orange-400 transition-colors duration-300"
-            >
-              <Youtube size={20} />
-            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-orange-400 transition-colors duration-300"><Instagram size={20} /></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-violet-400 transition-colors duration-300"><Facebook size={20} /></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-orange-400 transition-colors duration-300"><Youtube size={20} /></a>
           </div>
 
           <div className="flex md:hidden items-center gap-4">
@@ -253,12 +200,7 @@ export default function Navbar() {
           <div className="md:hidden bg-black border-t border-gray-800">
             <nav className="flex flex-col gap-4 p-4">
               {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-white font-semibold text-lg"
-                >
+                <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="text-white font-semibold text-lg">
                   {link.label}
                 </Link>
               ))}

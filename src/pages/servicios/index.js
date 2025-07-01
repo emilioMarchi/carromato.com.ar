@@ -5,7 +5,8 @@ import { TypewriterTitle } from "@/helpers/TypewriterEfect";
 import ItemsListGrid from "@/components/itemsListGrid/ItemsListGrid";
 import { PortfolioSectionGrid } from "@/components/PortfolioSectionGrid/PortfolioSectionGrid";
 import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
-
+import { ModelServicesItems } from "@/data/dataModels";
+import SuperBanner from "@/components/SuperBanner/SuperBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,23 +68,13 @@ const myFaqs = [
 export default function Services() {
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} min-h-screen p-8 sm:p-20`}
+      className={`${geistSans.className} ${geistMono.className}`}
     >
       {/* Sección principal */}
       <main className="flex flex-col md:flex-row items-center gap-8 mb-20">
-        <div className="w-full md:w-55%">
-          <DisplaySection type="banner" />
-        </div>
-        {/* Bloque Izquierdo */}
-        <div className="w-full md:w-45% flex justify-center md:justify-start">
-          <TypewriterTitle
-            text="DESARROLLO INTEGRAL DE PRODUCCIONES AUDIOVISUALES"
-            as="h1"
-            size="text-6xl"
-            className="text-white text-center md:text-left leading-[0.9]"
-            loop={false}
-          />
-        </div>
+          <SuperBanner items={ModelServicesItems} subtitle='SERVICIOS' />
+        
+       
 
         {/* Bloque Derecho */}
       </main>

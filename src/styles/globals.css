@@ -193,3 +193,8 @@ body {
   background-size: 600% 600%;
   animation: gradient-x 4s ease infinite;
 }
+@layer components {
+  .btn-gradient {
+    @apply inline-flex items-center px-5 py-2 rounded-md text-white font-semibold text-sm transition-all duration-500 bg-gradient-to-r from-orange-500 via-pink-500 to-violet-500 bg-[length:200%_200%] hover:bg-[position:100%_0];
+  }
+}

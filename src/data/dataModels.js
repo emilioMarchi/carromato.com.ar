@@ -40,28 +40,7 @@ export const ModelPortfolioItems = [
     },
   ];
 
-  export const ModelServicesItems = [
-    { 
-      slug: "/servicios/video-empresarial",
-      title: "Producción de videos institucionales para empresas."
-    },
-    { 
-      slug: "/servicios/publicidad",
-      title: "Creación de campañas publicitarias para redes sociales."
-    },
-    { 
-      slug: "/servicios/videoclips",
-      title: "Videoclips profesionales para bandas y artistas."
-    },
-    { 
-      slug: "/servicios/contenido-redes-sociales",
-      title: "Contenido audiovisual dinámico para potenciar redes de marcas."
-    },
-    { 
-      slug: "/servicios/fx-visuales",
-      title: "Visuales y motion graphics para eventos y presentaciones."
-    },
-  ];
+  
  export const ModelDetailServicesItems = [
     { slug: "/servicios/videos-empresariales", title: "Videos empresariales", description:'Breve descripción del servicio en cuestión' },
       { slug: "/servicios/publicidad", title: "Publicidad",  description:'Breve descripción del servicio en cuestión' },
@@ -69,3 +48,30 @@ export const ModelPortfolioItems = [
       { slug: "/servicios/contenido-redes-sociales", title: "Contenido redes sociales",  description:'Breve descripción del servicio en cuestión' },
       { slug: "/servicios/fx-visuales", title: "FX visuales",  description:'Breve descripción del servicio en cuestión' },
   ]
+export const ModelServicesItems = [
+    {
+      title: "Video Empresarial",
+      image: "https://pandoramarketing.net/wp-content/uploads/2020/10/200.gif",
+      slug: "/servicios/video-empresarial",
+    },
+    {
+      title: "Publicidad",
+      image: "https://miraveo.es/wp-content/uploads/2024/05/GIF1-ezgif.com-optimize-1.gif",
+      slug: "/servicios/publicidad",
+    },
+    {
+      title: "Videoclips",
+      image: "https://static.wixstatic.com/media/ddca6c_33587a47b836449ea3534caccffc950b~mv2.gif",
+      slug: "/servicios/videoclips",
+    },
+    {
+      title: "Contenido Redes Sociales",
+      image: "https://i.gifer.com/96e4.gif",
+      slug: "/servicios/contenido-redes-sociales",
+    },
+    {
+      title: "FX Visuales",
+      image: "https://byimpetus.com/wp-content/uploads/2025/02/dreamteam-ezgif.com-optimize.gif",
+      slug: "/servicios/fx-visuales",
+    },
+  ];

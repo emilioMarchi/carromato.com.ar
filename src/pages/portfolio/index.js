@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export default function Portfolio() {
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} min-h-screen p-8 sm:p-20`}
+      className={`${geistSans.className} ${geistMono.className} min-h-screen`}
     >
       <main className="flex flex-col items-center gap-8">
         {/* Tu contenido va acá */}

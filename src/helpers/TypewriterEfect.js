@@ -15,6 +15,23 @@ export function TypewriterTitle({
   const hasFinished = useRef(false);
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
+  const [currentText, setCurrentText] = useState(text);
+  const [isTyping, setIsTyping] = useState(true);
+
+  // Detectar cambio de texto y actualizar currentText para manejar el reseteo con control
+  useEffect(() => {
+    if (text !== currentText) {
+      // Iniciar proceso de tipeo para nuevo texto
+      setIsTyping(false); // Parar la animación actual
+      setTimeout(() => {
+        setCurrentText(text);
+        setIndex(0);
+        setIsDeleting(false);
+        hasFinished.current = false;
+        setIsTyping(true); // Reanudar tipeo
+      }, 50); // delay muy corto para evitar parpadeo abrupto
+    }
+  }, [text, currentText]);
 
   useEffect(() => {
     // IntersectionObserver: activa el efecto cuando el elemento es visible
@@ -24,7 +41,7 @@ export function TypewriterTitle({
           setIsVisible(true);
         }
       },
-      { threshold: 0.5 } // se activa cuando el 50% está visible
+      { threshold: 0.5 }
     );
 
     if (elementRef.current) {
@@ -40,32 +57,33 @@ export function TypewriterTitle({
 
   useEffect(() => {
     if (!isVisible) return;
-    if (typeof text !== "string" || text.length === 0) return;
+    if (!isTyping) return;
+    if (typeof currentText !== "string" || currentText.length === 0) return;
     if (!loop && hasFinished.current) return;
 
     let timer;
 
     if (!loop) {
-      if (index < text.length) {
+      if (index < currentText.length) {
         timer = setTimeout(() => {
-          setDisplayedText(text.substring(0, index + 1));
+          setDisplayedText(currentText.substring(0, index + 1));
           setIndex(index + 1);
         }, speed);
       } else {
         hasFinished.current = true;
       }
     } else {
-      if (!isDeleting && index < text.length) {
+      if (!isDeleting && index < currentText.length) {
         timer = setTimeout(() => {
-          setDisplayedText(text.substring(0, index + 1));
+          setDisplayedText(currentText.substring(0, index + 1));
           setIndex(index + 1);
         }, speed);
       } else if (isDeleting && index > 0) {
         timer = setTimeout(() => {
-          setDisplayedText(text.substring(0, index - 1));
+          setDisplayedText(currentText.substring(0, index - 1));
           setIndex(index - 1);
         }, speed);
-      } else if (!isDeleting && index === text.length) {
+      } else if (!isDeleting && index === currentText.length) {
         timer = setTimeout(() => {
           setIsDeleting(true);
         }, pause);
@@ -75,15 +93,15 @@ export function TypewriterTitle({
     }
 
     return () => clearTimeout(timer);
-  }, [text, index, isDeleting, speed, pause, loop, isVisible]);
+  }, [currentText, index, isDeleting, speed, pause, loop, isVisible, isTyping]);
 
   return (
     <Tag
       ref={elementRef}
       className={`${size} font-extrabold uppercase tracking-wide ${className}`}
     >
-      {displayedText}
-      {(loop || index < text.length) && isVisible && (
+      {displayedText || (isTyping ? "" : text)}
+      {(loop || index < currentText.length) && isVisible && (
         <span className="animate-pulse">|</span>
       )}
     </Tag>

@@ -160,7 +160,7 @@ export default function HomeBanner() {
           {/* Cuadro info grabación */}
           <div className="relative rounded-md border border-white/20 bg-black/40 p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
-              text="+ de 30000 hs de filmación"
+              text="+30000 hs de filmación"
               className="text-sm font-semibold text-gray-300 leading-snug"
             />
           </div>
