@@ -25,6 +25,7 @@ const gradientesHover = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  if (pathname === "/") return null;
   const [menuOpen, setMenuOpen] = useState(false);
   const [navState, setNavState] = useState("expanded");
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -32,7 +33,6 @@ export default function Navbar() {
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const submenuTimeout = useRef(null);
 
-  if (pathname === "/") return null;
 
   useEffect(() => {
     let scrollTimeout;

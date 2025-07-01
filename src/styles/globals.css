@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import 'maplibre-gl/dist/maplibre-gl.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -173,4 +175,21 @@ body {
   100% {
     transform: translateY(0px);
   }
+}
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background: linear-gradient(270deg,#fb923c, #a78bfa, #fb923c);
+  background-size: 600% 600%;
+  animation: gradient-x 4s ease infinite;
 }
