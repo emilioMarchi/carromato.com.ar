@@ -1,23 +1,43 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { Maximize2 } from "lucide-react";
 import ProjectBanner from "../ProjectBanner/ProjectBanner";
+import VideoPlayerModal from "../VideoPlayerModal/VideoPlayerModal";
+import ImageViewerModal from "../ImageViewerModal/ImageViewerModal";
 
 export default function WorkPageSection({ project }) {
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isImageOpen, setIsImageOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   return (
     <section className="w-full overflow-hidden bg-black text-white">
       {/* Banner superior */}
-      <ProjectBanner project={project} />
+      <ProjectBanner project={project} onPlay={() => setIsVideoOpen(true)} />
 
-      {/* Contenedor principal: video + galería + info técnica */}
+      {/* Video Modal */}
+      <VideoPlayerModal
+        src={project.background}
+        isOpen={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+      />
+
+      {/* Image Viewer Modal */}
+      <ImageViewerModal
+          isOpen={isImageOpen}
+          images={project.images}
+          currentIndex={currentImageIndex}
+          onClose={() => setIsImageOpen(false)}
+          onChangeIndex={(i) => setCurrentImageIndex(i)}
+        />
+
+
+      {/* Contenedor principal: info técnica + galería */}
       <div className="flex flex-col md:flex-row border-t border-white/10">
-
-    
-
-        {/* Derecha: info técnica + galería */}
         <div className="w-full md:w-[100%] flex flex-col md:flex-row p-3 gap-4">
-
+          
           {/* Info técnica */}
           <div className="flex-[3] flex flex-row justify-between gap-4 m-10">
             <div>
@@ -47,6 +67,10 @@ export default function WorkPageSection({ project }) {
               <div
                 key={index}
                 className="relative aspect-video overflow-hidden rounded-xl cursor-pointer group"
+                onClick={() => {
+                  setCurrentImageIndex(index);
+                  setIsImageOpen(true);
+                }}
               >
                 <Image
                   src={img.src}

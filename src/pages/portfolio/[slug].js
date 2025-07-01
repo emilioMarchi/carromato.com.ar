@@ -20,6 +20,7 @@ const geistMono = Geist_Mono({
 
 export const projectModel = {
   title: "Campaña Primavera",
+  src:'https://www.youtube.com/watch?v=TTfYcGKXb-U&t=1s&ab_channel=AlejandroLuengo',
   background: "https://byimpetus.com/wp-content/uploads/2025/02/dreamteam-ezgif.com-optimize.gif",
   slug:'/portfolio/campaña-primavera',
   summary: "Producción integral de campaña audiovisual para lanzamiento de temporada Primavera 2024. Desarrollo de concepto creativo, dirección, realización y edición.",

@@ -22,15 +22,12 @@ const geistMono = Geist_Mono({
 export default function Home() {
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} min-h-screen p-8 sm:p-20`}
+      className={`${geistSans.className} ${geistMono.className} w-full `}
     >
       <main className="flex flex-col items-center gap-8">
     
         <FeaturedWorkBanner items={ModelsHomeBanner} mode="banner" interval={0}/>
-        <ItemsListGrid mode='items'  items={ModelServicesItems} />
-        <PortfolioSectionGrid title="NUESTRO TRABAJO HABLA POR NOSOTROS" description="DESCRIPCION DE LA SECCION"
-        />
-        <UsSectionGrid/>
+      
         <FAQContactSection/>  
       </main>
     </div>

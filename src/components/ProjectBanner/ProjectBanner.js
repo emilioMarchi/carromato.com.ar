@@ -4,7 +4,7 @@ import { Play, Heart } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function ProjectBanner({ project }) {
+export default function ProjectBanner({ project, onPlay }) {
   const [liked, setLiked] = useState(false);
 
   return (
@@ -26,15 +26,10 @@ export default function ProjectBanner({ project }) {
             {project.title}
           </h2>
           <div className="flex gap-4 text-sm text-white/80">
-            	{
-                project.technicalData.map((item, index) => {
-                  if (item.label === 'Cliente' || item.label === 'Formato') return null;
-                  return (
-                    <span key={item.label}>{item.value}</span>
-                  );
-                })
-              }
-            
+            {project.technicalData.map((item) => {
+              if (item.label === "Cliente" || item.label === "Formato") return null;
+              return <span key={item.label}>{item.value}</span>;
+            })}
           </div>
         </div>
 
@@ -45,16 +40,18 @@ export default function ProjectBanner({ project }) {
             className={`p-3 rounded-full bg-white/10 backdrop-blur hover:bg-orange-400 transition ${
               liked ? "text-orange-400" : "text-white"
             }`}
+            aria-label="Like"
           >
             <Heart size={30} fill={liked ? "currentColor" : "none"} />
           </button>
 
-          <Link
-            href={project.slug}
+          <button
+            onClick={onPlay}
             className="p-3 rounded-full bg-white/10 backdrop-blur hover:bg-orange-400 transition text-white"
+            aria-label="Ver video"
           >
             <Play size={30} />
-          </Link>
+          </button>
         </div>
       </div>
     </div>
