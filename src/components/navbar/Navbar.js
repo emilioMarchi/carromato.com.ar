@@ -25,7 +25,6 @@ const gradientesHover = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  if (pathname === "/") return null;
   const [menuOpen, setMenuOpen] = useState(false);
   const [navState, setNavState] = useState("expanded");
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -36,7 +35,7 @@ export default function Navbar() {
 
   useEffect(() => {
     let scrollTimeout;
-
+    
     function handleScroll() {
       const currentScrollY = window.scrollY;
 
@@ -63,8 +62,8 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   const effectiveNavState =
-    navState === "hidden" && hoveringHiddenNav ? "expanded" : navState;
-
+  navState === "hidden" && hoveringHiddenNav ? "expanded" : navState;
+  
   const heightByState = {
     expanded: 80,
     medium: 50,
@@ -75,12 +74,13 @@ export default function Navbar() {
     const clean = slug.split("/").pop().replace(/-/g, " ");
     return clean.charAt(0).toUpperCase() + clean.slice(1);
   }
-
+  
   const currentSectionIndex = pathname
     ? links.findIndex((l) => pathname.startsWith(l.href))
     : 0;
-  const currentColor = activeColors[currentSectionIndex % activeColors.length];
+    const currentColor = activeColors[currentSectionIndex % activeColors.length];
 
+    if (pathname === "/") return null;
   return (
     <>
       {navState === "hidden" && (
