@@ -7,22 +7,17 @@ import ProjectBanner from "../ProjectBanner/ProjectBanner";
 import VideoPlayerModal from "../VideoPlayerModal/VideoPlayerModal";
 import ImageViewerModal from "../ImageViewerModal/ImageViewerModal";
 
+
 export default function WorkPageSection({ project }) {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
+  
   return (
     <section className="w-full overflow-hidden bg-black text-white">
       {/* Banner superior */}
-      <ProjectBanner project={project} onPlay={() => setIsVideoOpen(true)} />
+      <ProjectBanner project={project}  />
 
-      {/* Video Modal */}
-      <VideoPlayerModal
-        src={project.background}
-        isOpen={isVideoOpen}
-        onClose={() => setIsVideoOpen(false)}
-      />
 
       {/* Image Viewer Modal */}
       <ImageViewerModal

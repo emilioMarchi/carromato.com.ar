@@ -77,7 +77,7 @@ export default function SliderComponent({ items = [], title = "", titleDirection
             return (
               <Link
                 key={index}
-                href={`/portfolio/${item.slug}`}
+                href={`${item.slug}`}
                 className="relative rounded-2xl flex flex-col justify-end border border-white/20 overflow-hidden backdrop-blur-sm transition-transform duration-700 ease-in-out"
                 style={{
                   width: isDesktop ? 320 : 220,

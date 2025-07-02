@@ -101,10 +101,10 @@ export default function HomeBanner() {
           </div>
 
           {/* Título */}
-          <TypewriterTitle text="CARROMATO" as="h1" size="text-8xl" />
+          <TypewriterTitle text="CARROMATO" as="h1" size="text-7xl" />
 
           {/* Subtítulo */}
-          <p className="text-xl md:text-2xl text-gray-300 max-w-prose leading-[0.9] mt-2 mb-5">
+          <p className="text-xl md:text-1xl text-gray-300 max-w-prose leading-[0.9] mt-2 mb-5">
             Producción de contenido audiovisual para marcas, proyectos y artistas.
           </p>
 
@@ -118,9 +118,9 @@ export default function HomeBanner() {
               <Link
                 key={href}
                 href={href}
-                className="relative flex justify-center items-center aspect-[16/9] px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-56"
+                className="relative flex justify-center items-center aspect-[16/9] px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-45"
               >
-                <span className="relative z-10 leading-[0.9] text-center">
+                <span className="relative z-10 leading-[0.9] text-center text-sm">
                   {label}
                 </span>
                 <ArrowRight

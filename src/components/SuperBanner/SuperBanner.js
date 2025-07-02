@@ -1,24 +1,72 @@
+"use client";
+
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { TypewriterTitle } from "@/helpers/TypewriterEfect";
 
-export default function ServicesBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES" }) {
-  const [selected, setSelected] = useState(items[0]);
+export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES" }) {
+  const [displayedItem, setDisplayedItem] = useState(items[0]); // Imagen actual
+  const [nextItem, setNextItem] = useState(items[0]); // Imagen próxima (hover o auto)
+  const [isFading, setIsFading] = useState(false);
+  const currentIndexRef = useRef(0);
+  const intervalRef = useRef(null);
+
+  const fadeTo = (item) => {
+    setNextItem(item);
+    setIsFading(true);
+    setTimeout(() => {
+      setDisplayedItem(item);
+      setIsFading(false);
+    }, 500);
+  };
+
+  const nextAutoItem = () => {
+    const nextIndex = (currentIndexRef.current + 1) % items.length;
+    const next = items[nextIndex];
+    fadeTo(next);
+    currentIndexRef.current = nextIndex;
+  };
+
+  useEffect(() => {
+    intervalRef.current = setInterval(nextAutoItem, 5000);
+    return () => clearInterval(intervalRef.current);
+  }, [items]);
+
+  const handleMouseEnter = (item) => {
+    clearInterval(intervalRef.current);
+    fadeTo(item);
+  };
+
+  const handleMouseLeave = () => {
+    intervalRef.current = setInterval(nextAutoItem, 5000);
+  };
 
   return (
-    <div
-      className="w-full relative h-[75vh] overflow-hidden flex flex-col justify-between text-white p-10 pt-20"
-      style={{
-        backgroundImage: `url(${selected.image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Overlay general */}
-      <div className="absolute inset-0 bg-black/50 z-0" />
+    <div className="w-full relative h-[80vh] overflow-hidden flex flex-col justify-end text-white p-10 pt-20">
 
-      {/* Gradiente sombra uniforme desde abajo */}
+      {/* Imagen actual */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${isFading ? 'opacity-0' : 'opacity-100'} z-0`}
+        style={{
+          backgroundImage: `url(${displayedItem.video})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      {/* Imagen próxima (solo durante el fade) */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-500 ${isFading ? 'opacity-100' : 'opacity-0'} z-0`}
+        style={{
+          backgroundImage: `url(${nextItem.video})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50 z-0" />
       <div
         className="absolute inset-0 z-5 pointer-events-none"
         style={{
@@ -27,14 +75,13 @@ export default function ServicesBanner({ items, subtitle = "SERVICIOS AUDIOVISUA
       />
 
       {/* Contenido */}
-      <div className="relative z-10 flex flex-col gap-2 max-w-5xl">
+      <div className="relative z-10 flex flex-col gap-2 max-w-5xl mb-5">
         <div className="p-8">
           <p className="text-sm font-light text-white/80 tracking-wide">{subtitle}</p>
-          <TypewriterTitle text={selected.title} as="h1" size="text-6xl" loop={false} />
+          <TypewriterTitle text={nextItem.title} as="h1" size="text-6xl" loop={false} />
 
-          {/* Botón */}
           <Link
-            href={selected.slug}
+            href={nextItem.slug}
             className="relative flex justify-center items-center p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-56 mt-4"
           >
             <span className="relative z-10 leading-[0.9] text-center">Ver servicio</span>
@@ -47,16 +94,17 @@ export default function ServicesBanner({ items, subtitle = "SERVICIOS AUDIOVISUA
         </div>
       </div>
 
-      {/* Service cards bien distribuidas */}
+      {/* Cards */}
       <div className="relative z-10 flex flex-wrap justify-center gap-4 p-4 pt-0">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <Link
             href={item.slug}
             key={item.slug}
-            onMouseEnter={() => setSelected(item)}
-            className="group relative flex-shrink-0 w-48 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+            onMouseEnter={() => handleMouseEnter(item)}
+            onMouseLeave={handleMouseLeave}
+            className="group relative flex-shrink-0 w-40 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
             style={{
-              backgroundImage: `url(${item.image})`,
+              backgroundImage: `url(${item.video})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}

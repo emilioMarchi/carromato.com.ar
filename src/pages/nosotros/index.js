@@ -22,7 +22,7 @@ export default function UsPage() {
 
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} min-h-screen`}
+      className={`${geistSans.className} ${geistMono.className} min-h-screen`} data-aos="fade-down" data-aos-delay="400"
     >
       <main className="flex flex-col items-center gap-8">
         <BannerPanelData/>

@@ -68,7 +68,7 @@ const myFaqs = [
 export default function Services() {
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className}`}
+      className={`${geistSans.className} ${geistMono.className}`} data-aos="fade-down" data-aos-delay="200"
     >
       {/* Sección principal */}
       <main className="flex flex-col md:flex-row items-center gap-8 mb-20">
@@ -82,7 +82,6 @@ export default function Services() {
       {/* Sección de servicios */}
       <ItemsListGrid mode='servicios' items={servicesCardsItems} />
       <ItemsListGrid mode='portfolio' items={portfolioCardsItems} />
-      <PortfolioSectionGrid reverse={true} title="BUENAS, SOMOS CARROMATO" description="" images = {[  "/1.jpg","/2.jpg","/3.jpg", "/4.jpg",]} link = "/nosotros" />
       <FAQContactSection faqs={myFaqs} />
 
     </div>

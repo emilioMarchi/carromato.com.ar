@@ -3,9 +3,15 @@
 import { Play, Heart } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { useProvider } from "@/context/Provider";
 
 export default function ProjectBanner({ project, onPlay }) {
   const [liked, setLiked] = useState(false);
+  const {openVideo} = useProvider()
+
+  const HandleVideoPlayer = () => {
+    openVideo(project.background)
+  }
 
   return (
     <div
@@ -46,7 +52,7 @@ export default function ProjectBanner({ project, onPlay }) {
           </button>
 
           <button
-            onClick={onPlay}
+            onClick={HandleVideoPlayer}
             className="p-3 rounded-full bg-white/10 backdrop-blur hover:bg-orange-400 transition text-white"
             aria-label="Ver video"
           >

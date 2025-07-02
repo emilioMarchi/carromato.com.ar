@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export default function Home() {
   return (
     <div
-      className={`${geistSans.className} ${geistMono.className} w-full `}
+      className={`${geistSans.className} ${geistMono.className} w-full `} data-aos="fade-down" data-aos-delay="200"
     >
       <main className="flex flex-col items-center gap-8">
         <HomeBanner/>

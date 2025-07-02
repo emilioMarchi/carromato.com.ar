@@ -5,6 +5,9 @@ import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { useEffect, useState } from 'react';
 import { WpButton } from "@/components/WpButton/WpButton";
+import {Provider} from '@/context/Provider'
+
+import VideoPlayerModal from "@/components/VideoPlayerModal/VideoPlayerModal";
 
 export default function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
@@ -81,10 +84,13 @@ export default function App({ Component, pageProps }) {
 
       {/* Contenido */}
       <div className="relative z-10">
-        <Navbar />
-        <Component {...pageProps} />
-        <WpButton />
-        <Footer />
+        <Provider>
+          <Navbar />
+          <VideoPlayerModal/>
+          <Component {...pageProps} />
+          <WpButton />
+          <Footer />
+        </Provider>
       </div>
     </>
   );
