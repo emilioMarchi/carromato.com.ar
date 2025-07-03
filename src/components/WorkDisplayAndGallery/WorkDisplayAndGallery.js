@@ -6,27 +6,21 @@ import { Maximize2 } from "lucide-react";
 import ProjectBanner from "../ProjectBanner/ProjectBanner";
 import VideoPlayerModal from "../VideoPlayerModal/VideoPlayerModal";
 import ImageViewerModal from "../ImageViewerModal/ImageViewerModal";
+import { useProvider } from "@/context/Provider";
 
 
 export default function WorkPageSection({ project }) {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const [isImageOpen, setIsImageOpen] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   
+  const {updateViewer} = useProvider()
+
+
   return (
     <section className="w-full overflow-hidden bg-black text-white">
       {/* Banner superior */}
       <ProjectBanner project={project}  />
 
 
-      {/* Image Viewer Modal */}
-      <ImageViewerModal
-          isOpen={isImageOpen}
-          images={project.images}
-          currentIndex={currentImageIndex}
-          onClose={() => setIsImageOpen(false)}
-          onChangeIndex={(i) => setCurrentImageIndex(i)}
-        />
 
 
       {/* Contenedor principal: info técnica + galería */}
@@ -63,8 +57,11 @@ export default function WorkPageSection({ project }) {
                 key={index}
                 className="relative aspect-video overflow-hidden rounded-xl cursor-pointer group"
                 onClick={() => {
-                  setCurrentImageIndex(index);
-                  setIsImageOpen(true);
+                  updateViewer({
+                    isOpen: true,
+                    images: project.images,
+                    currentIndex: index,
+                  });
                 }}
               >
                 <Image

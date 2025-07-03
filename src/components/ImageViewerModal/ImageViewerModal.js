@@ -1,26 +1,26 @@
 "use client";
 
+import { useProvider } from "@/context/Provider";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ImageViewerModal({
-  isOpen,
-  images,
-  currentIndex,
-  onClose,
-  onChangeIndex,
-}) {
+export default function ImageViewerModal() {
   const [animating, setAnimating] = useState(false);
   const [direction, setDirection] = useState("next");
 
-  if (!isOpen) return null;
+  const {updateViewer, viewerImageConfig} = useProvider()
+
+  useEffect(()=>{
+    console.log('test')
+  }, [])
+  if (!viewerImageConfig.isOpen) return null;
 
   const handlePrev = () => {
     setDirection("prev");
     setAnimating(true);
     setTimeout(() => {
-      const newIndex = (currentIndex - 1 + images.length) % images.length;
-      onChangeIndex(newIndex);
+      const newIndex = (viewerImageConfig.currentIndex - 1 + viewerImageConfig.images.length) % viewerImageConfig.images.length;
+      updateViewer({currentIndex:newIndex});
       setAnimating(false);
     }, 300);
   };
@@ -29,17 +29,19 @@ export default function ImageViewerModal({
     setDirection("next");
     setAnimating(true);
     setTimeout(() => {
-      const newIndex = (currentIndex + 1) % images.length;
-      onChangeIndex(newIndex);
+      const newIndex = (viewerImageConfig.currentIndex + 1) % viewerImageConfig.images.length;
+      updateViewer({currentIndex:newIndex});
       setAnimating(false);
     }, 300);
   };
-
+  const handleViewerClose = (boolean) => {
+    updateViewer({isOpen:false})
+  }
   return (
     <div className="fixed inset-0 z-[999] bg-black/95 flex flex-col items-center justify-center p-4">
       {/* Cerrar */}
       <button
-        onClick={onClose}
+        onClick={handleViewerClose}
         className="absolute top-4 right-4 text-white bg-black/70 rounded-full p-2 hover:bg-orange-400 transition"
         aria-label="Cerrar"
       >
@@ -60,9 +62,9 @@ export default function ImageViewerModal({
         {/* Imagen con animación */}
         <div className="relative w-full h-full flex items-center justify-center">
           <img
-            key={currentIndex}
-            src={images[currentIndex].src}
-            alt={images[currentIndex].alt}
+            key={viewerImageConfig.currentIndex}
+            src={viewerImageConfig.images[viewerImageConfig.currentIndex].src}
+            alt={viewerImageConfig.images[viewerImageConfig.currentIndex].alt}
             className={`max-h-full max-w-full object-contain absolute transition-all duration-300 ${
               animating
                 ? direction === "next"
@@ -83,15 +85,15 @@ export default function ImageViewerModal({
 
       {/* Miniaturas */}
       <div className="flex gap-2 mt-6 overflow-x-auto max-w-[90vw]">
-        {images.map((img, index) => (
+        {viewerImageConfig.images.map((img, index) => (
           <button
             key={index}
             onClick={() => {
-              setDirection(index > currentIndex ? "next" : "prev");
-              onChangeIndex(index);
+              setDirection(index > viewerImageConfig.currentIndex ? "next" : "prev");
+              updateViewer(index);
             }}
             className={`border-2 rounded overflow-hidden w-24 h-16 flex-shrink-0 ${
-              index === currentIndex
+              index === viewerImageConfig.currentIndex
                 ? "border-orange-400"
                 : "border-transparent"
             }`}

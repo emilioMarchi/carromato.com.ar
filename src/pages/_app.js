@@ -8,6 +8,7 @@ import { WpButton } from "@/components/WpButton/WpButton";
 import {Provider} from '@/context/Provider'
 
 import VideoPlayerModal from "@/components/VideoPlayerModal/VideoPlayerModal";
+import ImageViewerModal from "@/components/ImageViewerModal/ImageViewerModal";
 
 export default function App({ Component, pageProps }) {
   const [scrollY, setScrollY] = useState(0);
@@ -87,6 +88,7 @@ export default function App({ Component, pageProps }) {
         <Provider>
           <Navbar />
           <VideoPlayerModal/>
+          <ImageViewerModal/>
           <Component {...pageProps} />
           <WpButton />
           <Footer />

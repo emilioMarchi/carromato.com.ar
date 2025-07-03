@@ -6,7 +6,8 @@ import {ClockIcon, MapPinIcon,UserIcon,MonitorIcon} from 'lucide-react'
 import SliderComponent from "@/components/SliderComponent/SliderComponent";
 import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
 import { ModelPortfolioItems } from "@/data/dataModels";
-
+import { useProvider } from "@/context/Provider";
+import { useEffect } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,13 +43,26 @@ export default function Work() {
 
   const router = useRouter()
   const {slug} = router.query
+  console.log(slug)
+  const {proyectSelected, setProyect} = useProvider()
+
+  useEffect(()=>{
+    if(proyectSelected!==projectModel){
+      setProyect(projectModel)
+
+    }
+    console.log(proyectSelected)
+  }, [proyectSelected])
+
+  if(proyectSelected===undefined || proyectSelected===null ){return null}
+
   return (
     <div
       className={`${geistSans.className} ${geistMono.className} min-h-screen`} data-aos="fade-down" data-aos-delay="200"
     >
       <main className="flex flex-col items-center gap-8">
         {/* Tu contenido va acá */}
-        <WorkDisplayAndGallery project={projectModel} />
+        <WorkDisplayAndGallery project={proyectSelected} />
         <SliderComponent title="TE PUEDEN INTERESAR..." items={ModelPortfolioItems}/>
         <FAQContactSection/>
       </main>
