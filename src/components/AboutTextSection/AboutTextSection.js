@@ -23,7 +23,7 @@ export default function AboutTextSection() {
           <TypewriterTitle
             text="Carromato es..."
             as="h2"
-            size="text-5xl md:text-7xl"
+            size="text-5xl md:text-4xl"
             className="font-extrabold mb-6 bg-gradient-to-r from-white to-violet-400 bg-clip-text text-transparent"
             data-aos="fade-up"
             data-aos-delay="100"

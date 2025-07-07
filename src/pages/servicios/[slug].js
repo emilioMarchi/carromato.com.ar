@@ -80,7 +80,7 @@ export default function Service() {
         )}
         <ServiceBanner slug={slug} items={ModelPortfolioItems} />
         <SliderComponent items={ModelPortfolioItems} />
-        <ItemsListGrid mode="items" items={serviceDetails} />
+     
         <FAQContactSection />
 
       </main>
