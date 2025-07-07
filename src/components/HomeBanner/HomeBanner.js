@@ -51,7 +51,7 @@ export default function HomeBanner() {
 
   return (
     <div
-      className="w-[100vw] relative h-[95vh] md:h-[80vh] md:pb-10 overflow-hidden"
+      className=" p-3 relative h-[42rem] md:h-[80vh] md:pb-10 overflow-hidden md:p-5"
     
     >
       {/* Fondo GIF */}
@@ -66,7 +66,7 @@ export default function HomeBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-0" />
 
       {/* Contenido principal */}
-      <div className="flex h-full">
+      <div className="flex h-full ">
         {/* Izquierda */}
         <div
           className="relative w-[100vw] z-10 flex-1 flex flex-col justify-end text-white pt-20 p-2 md:mr-[250px]"
@@ -104,12 +104,12 @@ export default function HomeBanner() {
           <TypewriterTitle className='' text="CARROMATO" as="h1" size="text-6xl md:text-7xl" />
 
           {/* Subtítulo */}
-          <p className=" w-100 md:w-[50vw] text-xl  md:text-1xl text-gray-300 leading-[0.9] mt-2 mb-10">
+          <p className=" w-full md:w-[50vw] text-lg  md:text-1xl text-gray-300 leading-[0.9] mt-2 mb-5">
             Producción de contenido audiovisual para marcas, proyectos y artistas.
           </p>
 
           {/* Botones */}
-          <div className="flex flex-col justify-center md:justify-start items-center gap-1 md:gap-2 md:flex-row md:flex-wrap md:mt-6 w-full">
+          <div className="flex flex-col justify-center md:justify-start items-center gap-2 md:gap-2 md:flex-row md:flex-wrap md:mt-6 w-full">
             {[
               { href: "/servicios", label: "SERVICIOS AUDIOVISUALES" },
               { href: "/portfolio", label: "CONOCÉ NUESTRO TRABAJO" },
@@ -135,7 +135,7 @@ export default function HomeBanner() {
 
         {/* Barra lateral derecha */}
         <aside
-          className="absolute w-40 top-0 right-0 z-10 md:w-72 flex flex-col gap-1 text-white m-2 justify-center item-center"
+          className="absolute p-2 w-40 top-0 right-0 z-10 md:w-72 flex flex-col gap-1 text-white m-2 justify-center item-center"
           
         >
           {/* Cuadro mapa */}
@@ -146,8 +146,8 @@ export default function HomeBanner() {
         
             />
             {/* Info ubicación */}
-            <div className="flex items-center gap-2 mt-2 text-sm font-semibold text-gray-300">
-              <MapPin size={18} />
+            <div className="flex items-center gap-2 mt-2 text-sm font-semibold text-gray-300 leading-[0.9]">
+              <MapPin size={20} />
               <span>Buenos Aires, Argentina</span>
             </div>
           </div>
