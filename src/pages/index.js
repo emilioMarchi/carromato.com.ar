@@ -5,6 +5,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
 import HomeBanner from "@/components/HomeBanner/HomeBanner";
 
+import ItemsListGrid from "@/components/itemsListGrid/ItemsListGrid";
+import { ModelPortfolioItems } from "@/data/dataModels";
+import SliderComponent from "@/components/SliderComponent/SliderComponent";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -23,8 +26,8 @@ export default function Home() {
       <main className="flex flex-col items-center gap-8">
         <HomeBanner/>
 
-      
-        <FAQContactSection/>  
+        <SliderComponent title="Portfolio" items={ModelPortfolioItems}/>
+        <FAQContactSection />  
       </main>
     </div>
   );

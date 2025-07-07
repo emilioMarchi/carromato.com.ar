@@ -51,7 +51,7 @@ export default function HomeBanner() {
 
   return (
     <div
-      className="w-full relative h-[100vh] md:h-[80vh] pb-10 overflow-hidden"
+      className="w-[100vw] relative h-[95vh] md:h-[80vh] md:pb-10 overflow-hidden"
     
     >
       {/* Fondo GIF */}
@@ -66,10 +66,10 @@ export default function HomeBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-0" />
 
       {/* Contenido principal */}
-      <div className="flex h-full w-full">
+      <div className="flex h-full">
         {/* Izquierda */}
         <div
-          className="relative z-10 flex-1 flex flex-col justify-end text-white pt-20 p-2 md:mr-[250px]"
+          className="relative w-[100vw] z-10 flex-1 flex flex-col justify-end text-white pt-20 p-2 md:mr-[250px]"
           
         >
           {/* Redes sociales */}
@@ -101,15 +101,15 @@ export default function HomeBanner() {
           </div>
 
           {/* Título */}
-          <TypewriterTitle className='p-2' text="CARROMATO" as="h1" size="text-6xl md:text-7xl" />
+          <TypewriterTitle className='' text="CARROMATO" as="h1" size="text-6xl md:text-7xl" />
 
           {/* Subtítulo */}
-          <p className=" w-100 md:w-[50vw] text-xl  md:text-1xl text-gray-300 leading-[0.9] mt-2 mb-5">
+          <p className=" w-100 md:w-[50vw] text-xl  md:text-1xl text-gray-300 leading-[0.9] mt-2 mb-10">
             Producción de contenido audiovisual para marcas, proyectos y artistas.
           </p>
 
           {/* Botones */}
-          <div className="flex flex-col justify-center md:justify-start items-center md:flex-row md:flex-wrap gap-2 md:mt-6">
+          <div className="flex flex-col justify-center md:justify-start items-center gap-1 md:gap-2 md:flex-row md:flex-wrap md:mt-6 w-full">
             {[
               { href: "/servicios", label: "SERVICIOS AUDIOVISUALES" },
               { href: "/portfolio", label: "CONOCÉ NUESTRO TRABAJO" },
@@ -118,7 +118,7 @@ export default function HomeBanner() {
               <Link
                 key={href}
                 href={href}
-                className="w-100 md:w-45  p-4 md:p-5 relative flex justify-center items-center md:aspect-[16/9] px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 "
+                className="w-full md:w-45 p-4 md:p-5 relative flex justify-center items-center md:aspect-[16/9] border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105"
               >
                 <span className="relative z-10 leading-[0.9] text-center text-sm">
                   {label}
@@ -135,7 +135,7 @@ export default function HomeBanner() {
 
         {/* Barra lateral derecha */}
         <aside
-          className="absolute w-40 top-0 right-0 z-10 md:w-72 flex flex-col gap-1 text-white m-5 justify-center item-center"
+          className="absolute w-40 top-0 right-0 z-10 md:w-72 flex flex-col gap-1 text-white m-2 justify-center item-center"
           
         >
           {/* Cuadro mapa */}
@@ -156,7 +156,7 @@ export default function HomeBanner() {
           <div className="relative rounded-md border border-white/20 bg-black/40 p-2 md-p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
               text="+30000 hs de filmación"
-              className="text-sm font-semibold text-gray-300 leading-snug"
+              className="text-sm font-semibold text-gray-300 leading-[0.9]"
             />
           </div>
 
@@ -164,7 +164,7 @@ export default function HomeBanner() {
           <div className="relative rounded-md border border-white/20 bg-black/40 p-2 md-p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
               text="+100 proyectos realizados"
-              className="text-sm font-semibold text-gray-300 leading-snug"
+              className="text-sm font-semibold text-gray-300 leading-[0.9]"
             />
           </div>
         </aside>
