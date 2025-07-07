@@ -51,8 +51,8 @@ export default function HomeBanner() {
 
   return (
     <div
-      className="w-full relative h-[80vh] mx-auto p-8 pb-10 overflow-hidden"
-      style={{ position: "relative" }}
+      className="w-full relative h-[100vh] md:h-[80vh] pb-10 overflow-hidden"
+    
     >
       {/* Fondo GIF */}
       <div
@@ -69,8 +69,8 @@ export default function HomeBanner() {
       <div className="flex h-full w-full">
         {/* Izquierda */}
         <div
-          className="relative z-10 flex-1 flex flex-col justify-end text-white max-w-[60%]"
-          style={{ marginRight: "288px" }} // espacio para barra lateral
+          className="relative z-10 flex-1 flex flex-col justify-end text-white pt-20 p-2 md:mr-[250px]"
+          
         >
           {/* Redes sociales */}
           <div className="flex gap-4 mb-2">
@@ -101,15 +101,15 @@ export default function HomeBanner() {
           </div>
 
           {/* Título */}
-          <TypewriterTitle text="CARROMATO" as="h1" size="text-7xl" />
+          <TypewriterTitle className='p-2' text="CARROMATO" as="h1" size="text-6xl md:text-7xl" />
 
           {/* Subtítulo */}
-          <p className="text-xl md:text-1xl text-gray-300 max-w-prose leading-[0.9] mt-2 mb-5">
+          <p className=" w-100 md:w-[50vw] text-xl  md:text-1xl text-gray-300 leading-[0.9] mt-2 mb-5">
             Producción de contenido audiovisual para marcas, proyectos y artistas.
           </p>
 
           {/* Botones */}
-          <div className="flex flex-wrap gap-3 mt-6">
+          <div className="flex flex-col justify-center md:justify-start items-center md:flex-row md:flex-wrap gap-2 md:mt-6">
             {[
               { href: "/servicios", label: "SERVICIOS AUDIOVISUALES" },
               { href: "/portfolio", label: "CONOCÉ NUESTRO TRABAJO" },
@@ -118,14 +118,14 @@ export default function HomeBanner() {
               <Link
                 key={href}
                 href={href}
-                className="relative flex justify-center items-center aspect-[16/9] px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-45"
+                className="w-100 md:w-45  p-4 md:p-5 relative flex justify-center items-center md:aspect-[16/9] px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 "
               >
                 <span className="relative z-10 leading-[0.9] text-center text-sm">
                   {label}
                 </span>
                 <ArrowRight
                   size={20}
-                  className="absolute bottom-2 right-2 z-10 transition-transform duration-300 group-hover:translate-x-1"
+                  className="absolute md:bottom-2 right-2 z-10 transition-transform duration-300 group-hover:translate-x-1"
                 />
                 <span className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 animate-gradient-x rounded-md"></span>
               </Link>
@@ -135,20 +135,15 @@ export default function HomeBanner() {
 
         {/* Barra lateral derecha */}
         <aside
-          className="absolute top-0 right-0 z-10 w-72 flex flex-col gap-4 text-white m-5"
-          style={{
-            paddingRight: "6px",
-            maxHeight: "80vh",
-            overflow: "hidden",
-            justifyContent: "flex-start",
-          }}
+          className="absolute w-40 top-0 right-0 z-10 md:w-72 flex flex-col gap-1 text-white m-5 justify-center item-center"
+          
         >
           {/* Cuadro mapa */}
           <div className="relative rounded-md border border-white/20 bg-black/40 p-2 flex flex-col">
             <div
               ref={mapContainer}
               className="aspect-square rounded-md overflow-hidden w-full"
-              style={{ minHeight: "180px" }}
+        
             />
             {/* Info ubicación */}
             <div className="flex items-center gap-2 mt-2 text-sm font-semibold text-gray-300">
@@ -158,7 +153,7 @@ export default function HomeBanner() {
           </div>
 
           {/* Cuadro info grabación */}
-          <div className="relative rounded-md border border-white/20 bg-black/40 p-4 flex flex-col justify-center items-center text-center">
+          <div className="relative rounded-md border border-white/20 bg-black/40 p-2 md-p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
               text="+30000 hs de filmación"
               className="text-sm font-semibold text-gray-300 leading-snug"
@@ -166,7 +161,7 @@ export default function HomeBanner() {
           </div>
 
           {/* Cuadro proyectos realizados */}
-          <div className="relative rounded-md border border-white/20 bg-black/40 p-4 flex flex-col justify-center items-center text-center">
+          <div className="relative rounded-md border border-white/20 bg-black/40 p-2 md-p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
               text="+100 proyectos realizados"
               className="text-sm font-semibold text-gray-300 leading-snug"
