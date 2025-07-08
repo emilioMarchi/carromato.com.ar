@@ -51,7 +51,7 @@ export default function HomeBanner() {
 
   return (
     <div
-      className=" p-3 relative h-[42rem] md:h-[80vh] md:pb-10 overflow-hidden md:p-5"
+      className=" p-3 relative md:w-full h-[42rem] md:h-[80vh] md:pb-10 overflow-hidden md:p-5"
     
     >
       {/* Fondo GIF */}
