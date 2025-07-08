@@ -71,7 +71,7 @@ export default function Services() {
       className={`${geistSans.className} ${geistMono.className}`} data-aos="fade-down" data-aos-delay="200"
     >
       {/* Sección principal */}
-      <main className="flex flex-col md:flex-row items-center gap-8 mb-20">
+      <main className="flex flex-col md:flex-row items-center mb-20">
           <SuperBanner items={ModelServicesItems} subtitle='SERVICIOS' />
         
        
