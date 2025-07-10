@@ -23,10 +23,10 @@ export default function FeaturedWorkBanner({ items = [], interval = 7000, mode =
   const currentItem = items[activeIndex];
 
   return (
-    <div className="w-full overflow-hidden relative h-[80vh]">
+    <div className="overflow-hidden relative h-[90vh] md:h-[80vh]">
       {/* Fondo con GIF */}
       <div
-        className="absolute inset-0 w-full h-full bg-center bg-cover transition-all duration-700"
+        className="absolute inset-0 h-full bg-center bg-cover transition-all duration-700"
         style={{
           backgroundImage: `url(${currentItem.video})`,
         }}
@@ -36,11 +36,11 @@ export default function FeaturedWorkBanner({ items = [], interval = 7000, mode =
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
 
       {/* Contenido */}
-      <div className="relative z-20 flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto h-full p-8">
-        <div className="w-full md:w-1/2 flex flex-col gap-4 text-white">
-          {/* Solo mostrar en modo banner */}
+      <div className="relative z-20 flex flex-col md:flex-row items-center justify-between h-full p-5">
+        <div className="w-full md:w-1/2 flex flex-col gap-4 text-white pt-[30vh] md:pt-0">
+          {/* Solo mostrar en modo banner */} 
           {mode === "portfolio" && (
-            <p className="text-sm uppercase tracking-widest text-gray-400">
+            <p className="text-lg uppercase tracking-widest text-gray-400">
               Trabajo destacado
             </p>
           )}
@@ -49,13 +49,13 @@ export default function FeaturedWorkBanner({ items = [], interval = 7000, mode =
             key={activeIndex}
             text={currentItem.title}
             as="h2"
-            size="text-5xl md:text-7xl"
+            size="text-4xl md:text-7xl"
             className="font-extrabold leading-[0.9]"
             speed={180}
             loop={false}
           />
 
-          <p className="text-lg text-gray-300 max-w-prose">
+          <p className="text-xl md:text-2xl  text-gray-300 max-w-prose leading-[1]">
             {currentItem.description}
           </p>
 
@@ -63,7 +63,7 @@ export default function FeaturedWorkBanner({ items = [], interval = 7000, mode =
           {mode === "portfolio" && currentItem.slug && (
             <Link
             href={currentItem.slug}
-            className="relative inline-block px-6 py-3 border border-orange-400 text-white text-lg font-semibold uppercase rounded-full overflow-hidden group w-fit self-center md:self-start transition-transform duration-300 hover:scale-105"
+            className="relative inline-block px-6 py-3 border border-orange-400 text-white text-lg font-semibold uppercase rounded-full overflow-hidden group w-fit md:self-start transition-transform duration-300 hover:scale-105"
           >
             <span className="relative z-10">Ver proyecto</span>
             <span className="absolute inset-0 opacity-20 group-hover:opacity-40 transition duration-500 animate-gradient-x rounded-full"></span>

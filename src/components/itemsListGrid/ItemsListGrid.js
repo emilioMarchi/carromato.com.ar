@@ -1,39 +1,47 @@
+"use client";
+
 import { TypewriterTitle } from "@/helpers/TypewriterEfect";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const ModelCardsItems = [
-  { 
+  {
     slug: "video-empresarial",
     title: "Institucional EmpresaTech",
     description: "Video institucional para presentación corporativa de EmpresaTech.",
     video: "https://pandoramarketing.net/wp-content/uploads/2020/10/200.gif"
   },
-  { 
+  {
     slug: "publicidad",
     title: "Campaña Primavera 2025",
     description: "Serie de spots publicitarios para redes sociales de MarcaNova.",
     video: "https://miraveo.es/wp-content/uploads/2024/05/GIF1-ezgif.com-optimize-1.gif"
   },
-  { 
+  {
     slug: "videoclips",
     title: "Videoclip 'Horizonte'",
     description: "Producción audiovisual para la banda Prisma en exteriores.",
     video: "https://static.wixstatic.com/media/ddca6c_33587a47b836449ea3534caccffc950b~mv2.gif"
   },
-  { 
+  {
     slug: "contenido-redes-sociales",
     title: "Contenido Verano CoolUp",
     description: "Reels y videos para la campaña estacional de CoolUp Bebidas.",
     video: "https://i.gifer.com/96e4.gif"
   },
-  { 
+  {
     slug: "fx-visuales",
     title: "Visuales Evento Lumina",
     description: "Motion graphics y visuales en vivo para festival Lumina 2025.",
     video: "https://byimpetus.com/wp-content/uploads/2025/02/dreamteam-ezgif.com-optimize.gif"
   },
 ];
+
+// 👉 función para truncar texto
+function truncateText(text, maxLength = 90) {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + "…";
+}
 
 export default function ItemsListGrid({ items = [], mode = "servicios" }) {
   const gradientesTexto = [
@@ -43,7 +51,7 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
 
   if (mode === "items") {
     return (
-      <div className="w-full flex flex-wrap justify-center gap-2 mb-5  mx-auto">
+      <div className="w-full flex flex-wrap justify-center gap-2 mb-5 mx-auto">
         {items.map((item, index) => (
           <ItemCard
             key={index}
@@ -57,23 +65,18 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
     );
   }
 
-  // Render para otros modos ("servicios", "portfolio")
   return (
-    <div className="w-full flex flex-col items-center gap-10 mb-20 mt-10">
-      {/* Primera fila */}
-      <div className="flex flex-wrap wrap-1 text- center items-center justify-center gap-4 w-full max-w-6xl">
+    <div className="w-full flex flex-col justify-center items-center gap-3 p-2 mb-20 mt-10">
+      {/* Título */}
+      <div className="flex flex-wrap wrap-1 items-center justify-center gap-4 w-full max-w-6xl pb-10">
         <h2
-          className="text-7xl md:text-5xl  font-extrabold leading-[0.8] text-white text-center"
+          className="text-7xl md:text-6xl font-extrabold leading-[0.8] text-white text-center"
           data-aos="fade-in"
         >
           {mode === "portfolio" ? (
-            <>
-              PORT<br />FOLIO
-            </>
+            <>PORT<br />FOLIO</>
           ) : (
-            <>
-              CARRO_<br />MATO
-            </>
+            <>CARRO_<br />MATO</>
           )}
         </h2>
         {mode === "servicios" && (
@@ -85,20 +88,20 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
             PRODUCCIONES<br />AUDIOVISUALES
           </h2>
         )}
-         {mode === "portfolio" && (
+        {mode === "portfolio" && (
           <div
-            className="hidden sm:flex flex-col justify-center items-start text-white min-w-[220px] sm:w-[320px] aspect-video p-3"
+            className="hidden sm:flex flex-col justify-center items-start text-white min-w-[220px] sm:w-[320px]"
             data-aos="fade-in"
             data-aos-delay="450"
           >
-            <h3 className="text-2xl sm:text-5xl leading-[0.9]">NUESTRO TRABAJO HABLA </h3>
-            <p className="text-2xl sm:text-4xl leading-[0.9]">POR NOSOTROS</p>
+            <h3 className="text-2xl md:text-4xl leading-[0.9]">NUESTRO TRABAJO HABLA</h3>
+            <p className="text-2xl md:text-3xl leading-[0.9]">POR NOSOTROS</p>
           </div>
         )}
       </div>
 
-      {/* Resto de cards + subtítulo */}
-      <div className="flex flex-col p-3 sm:flex-wrap sm:flex-row justify-center items-center gap-2 w-full">
+      {/* Cards */}
+      <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3 md:w-[90%]">
         {items.map((item, index) => (
           <ItemCard
             key={index}
@@ -108,8 +111,6 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
             gradientesTexto={gradientesTexto}
           />
         ))}
-
-     
       </div>
     </div>
   );
@@ -119,7 +120,6 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
   const interactiveClasses =
     mode === "items" ? "" : "cursor-pointer hover:scale-105";
 
-  // Determinar wrapper según mode y presencia de slug
   const hasLink = mode !== "items" && item.slug;
   const Wrapper = hasLink ? Link : "div";
   const wrapperProps = hasLink ? { href: item.slug } : {};
@@ -127,7 +127,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className={`relative group w-full md:w-[220px] aspect-video p-3 rounded-2xl flex flex-col ${
+      className={`relative group w-full md:w-[220px] xl:w-[30%] aspect-video p-3 rounded-2xl flex flex-col ${
         mode === "portfolio" ? "justify-end" : "justify-center"
       } border border-white/20 overflow-hidden transition-transform duration-300 ease-in-out ${interactiveClasses} backdrop-blur-sm`}
       data-aos="fade-in"
@@ -150,7 +150,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
         } z-10`}
       />
 
-      {/* Luz blur solo en modo servicios */}
+      {/* Luz blur */}
       {mode === "servicios" && (
         <div
           className={`absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 rounded-full blur-3xl opacity-50 pointer-events-none transition-all duration-300 group-hover:w-36 group-hover:h-36 ${
@@ -166,32 +166,25 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
         <TypewriterTitle
           text={item.title}
           as="h3"
-          size={mode === "items" ? "text-sm sm:text-sm" : "text-lg sm:text-xl"}
-          className={`font-semibold leading-[1.1] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
+          className={`font-semibold leading-[0.9] text-[1.7rem] md:text-[1rem] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
           loop={false}
         />
         {mode !== "items" && item.description && (
           <TypewriterTitle
-            text={item.description}
+            text={truncateText(item.description, 60)}
             as="p"
-            size={`${
-              mode === "portfolio"
-                ? "text-[10px] sm:text-xs"
-                : "text-xs sm:text-sm"
-            }`}
             className={`${
               mode === "portfolio" ? "font-light" : "font-normal"
-            } text-white/80 leading-[1.1] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
+            } text-white/80 leading-[1] text-lg md:text-sm drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
             loop={false}
           />
         )}
       </div>
 
-      {/* Flecha inferior derecha */}
+      {/* Flecha */}
       {(mode === "portfolio" || mode === "servicios") && (
         <ArrowRight className="absolute z-100 bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 w-5 h-5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
       )}
     </Wrapper>
   );
 }
-

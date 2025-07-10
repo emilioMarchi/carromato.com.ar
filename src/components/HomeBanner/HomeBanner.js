@@ -136,7 +136,7 @@ export default function HomeBanner() {
         {/* Barra lateral derecha */}
         
         <aside
-          className="absolute p-2 w-40 top-0 right-0 z-10 md:w-72 lg:w-[30vw] flex flex-col gap-1 text-white m-2 justify-center item-center"
+          className="absolute p-2 w-40 top-0 right-0 z-10 md:w-72 lg:w-[30vw] xl:w-[20vw] flex flex-col gap-1 text-white m-2 justify-center item-center"
           
         >
           {/* Cuadro mapa */}

@@ -77,21 +77,21 @@ export function FAQContactSection({ faqs = [{ question: "¿Cuánto tarda un proy
 
   return (
     <section className="py-16 text-white">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 px-6">
+      <div className="mx-auto grid md:grid-cols-2 gap-5 px-2 md:px-5">
         {/* FAQs */}
-        <div className="space-y-4 max-w-xl w-full mx-auto md:mx-0">
-          <h2 className="text-4xl font-extrabold uppercase text-center md:text-left mb-8">Preguntas Frecuentes</h2>
-          <div className="space-y-4">
+        <div className="w-full mx-auto md:mx-0 text-center">
+          <h2 className="text-4xl font-extrabold uppercase text-center md:text-left leading-[0.9] mb-4">Preguntas Frecuentes</h2>
+          <div className="">
             {faqs.map((faq, index) => (
               <div key={index} className="relative rounded-lg overflow-hidden w-full">
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="relative flex justify-between items-center px-6 py-4 w-full bg-black rounded-lg focus:outline-none transition-colors"
+                  className="relative flex justify-between items-center px-6 py-6 w-full bg-black rounded-lg focus:outline-none transition-colors"
                   aria-expanded={openIndex === index}
                   aria-controls={`faq-content-${index}`}
                   id={`faq-header-${index}`}
                 >
-                  <span className="flex items-center text-lg font-semibold">{faq.question}</span>
+                  <span className="flex items-center text-lg font-semibold leading-[1]">{faq.question}</span>
                   <svg
                     className={`w-6 h-6 transform transition-transform duration-300 ${openIndex === index ? "rotate-90" : ""}`}
                     fill="none"
@@ -109,7 +109,7 @@ export function FAQContactSection({ faqs = [{ question: "¿Cuánto tarda un proy
                   id={`faq-content-${index}`}
                   role="region"
                   aria-labelledby={`faq-header-${index}`}
-                  className={`px-6 pb-4 text-gray-300 transition-all duration-300 overflow-hidden ${
+                  className={`px-6 pb-4 text-gray-300 transition-all duration-300 overflow-hidden leading-[1] ${
                     openIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                   }`}
                   style={{ transitionProperty: "max-height, opacity" }}
