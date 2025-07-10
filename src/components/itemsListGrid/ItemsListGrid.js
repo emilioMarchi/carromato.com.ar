@@ -43,7 +43,7 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
 
   if (mode === "items") {
     return (
-      <div className="w-full flex flex-wrap justify-center gap-6 mb-20 max-w-6xl mx-auto">
+      <div className="w-full flex flex-wrap justify-center gap-2 mb-5  mx-auto">
         {items.map((item, index) => (
           <ItemCard
             key={index}
@@ -61,9 +61,9 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
   return (
     <div className="w-full flex flex-col items-center gap-10 mb-20 mt-10">
       {/* Primera fila */}
-      <div className="flex flex-row items-center justify-center gap-4 w-full max-w-6xl">
+      <div className="flex flex-wrap wrap-1 text- center items-center justify-center gap-4 w-full max-w-6xl">
         <h2
-          className="text-5xl sm:text-8xl font-extrabold leading-[0.8] text-white text-center sm:text-left flex-shrink-0 w-[180px] sm:w-auto"
+          className="text-7xl md:text-5xl  font-extrabold leading-[0.8] text-white text-center"
           data-aos="fade-in"
         >
           {mode === "portfolio" ? (
@@ -76,40 +76,16 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
             </>
           )}
         </h2>
-
-        <ItemCard
-          item={items[0]}
-          index={0}
-          mode={mode}
-          gradientesTexto={gradientesTexto}
-        />
-      </div>
-
-      {/* Resto de cards + subtítulo */}
-      <div className="flex flex-col sm:flex-wrap sm:flex-row justify-center items-center gap-4 sm:gap-6 w-full max-w-6xl">
-        {items.slice(1).map((item, index) => (
-          <ItemCard
-            key={index}
-            item={item}
-            index={index + 1}
-            mode={mode}
-            gradientesTexto={gradientesTexto}
-          />
-        ))}
-
-        {/* Solo en modo servicios, último título */}
         {mode === "servicios" && (
           <h2
-            className="text-5xl sm:text-6xl font-light leading-[1] text-white text-center sm:text-left"
+            className="text-2xl md:text-5xl font-light leading-[1] text-white text-center"
             data-aos="fade-in"
             data-aos-delay="300"
           >
             PRODUCCIONES<br />AUDIOVISUALES
           </h2>
         )}
-
-        {/* Solo en modo portfolio, subtítulo a la derecha de última card */}
-        {mode === "portfolio" && (
+         {mode === "portfolio" && (
           <div
             className="hidden sm:flex flex-col justify-center items-start text-white min-w-[220px] sm:w-[320px] aspect-video p-3"
             data-aos="fade-in"
@@ -119,6 +95,21 @@ export default function ItemsListGrid({ items = [], mode = "servicios" }) {
             <p className="text-2xl sm:text-4xl leading-[0.9]">POR NOSOTROS</p>
           </div>
         )}
+      </div>
+
+      {/* Resto de cards + subtítulo */}
+      <div className="flex flex-col p-3 sm:flex-wrap sm:flex-row justify-center items-center gap-2 w-full">
+        {items.map((item, index) => (
+          <ItemCard
+            key={index}
+            item={item}
+            index={index + 1}
+            mode={mode}
+            gradientesTexto={gradientesTexto}
+          />
+        ))}
+
+     
       </div>
     </div>
   );
@@ -136,7 +127,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className={`relative group w-[220px] sm:w-[320px] aspect-video p-3 rounded-2xl flex flex-col ${
+      className={`relative group w-full md:w-[220px] aspect-video p-3 rounded-2xl flex flex-col ${
         mode === "portfolio" ? "justify-end" : "justify-center"
       } border border-white/20 overflow-hidden transition-transform duration-300 ease-in-out ${interactiveClasses} backdrop-blur-sm`}
       data-aos="fade-in"
@@ -194,12 +185,13 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
             loop={false}
           />
         )}
-        {mode === "portfolio" && (
-          <div className="mt-1">
-            <ArrowRight className="w-5 h-5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
-          </div>
-        )}
       </div>
+
+      {/* Flecha inferior derecha */}
+      {(mode === "portfolio" || mode === "servicios") && (
+        <ArrowRight className="absolute z-100 bottom-1.5 right-1.5 sm:bottom-2 sm:right-2 w-5 h-5 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
+      )}
     </Wrapper>
   );
 }
+

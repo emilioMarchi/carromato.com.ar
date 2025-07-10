@@ -80,7 +80,7 @@ export default function HomeBanner() {
               className="text-white hover:text-orange-400 transition-colors duration-300"
               aria-label="Instagram"
             >
-              <Instagram className="w-7 h-7 md:w-8 md:h-8 lg:w-12 lg:h-12 xl:w-10 xl:h-10" />
+              <Instagram className="w-7 h-7 md:w-8 md:h-8 lg:w-11 lg:h-11 xl:w-10 xl:h-10" />
             </Link>
             <Link
               href="https://www.facebook.com/carromato"
@@ -88,7 +88,7 @@ export default function HomeBanner() {
               className="text-white hover:text-violet-400 transition-colors duration-300"
               aria-label="Facebook"
             >
-              <Facebook className="w-7 h-7 md:w-8 md:h-8 lg:w-12 lg:h-12xl:w-10 xl:h-10" />
+              <Facebook className="w-7 h-7 md:w-8 md:h-8 lg:w-11 lg:h-11 xl:w-10 xl:h-10" />
             </Link>
             <Link
               href="https://www.youtube.com/carromato"
@@ -96,20 +96,20 @@ export default function HomeBanner() {
               className="text-white hover:text-orange-400 transition-colors duration-300"
               aria-label="YouTube"
             >
-              <Youtube className="w-7 h-7 md:w-8 md:h-8 lg:w-12 lg:h-12 xl:w-10 xl:h-10" />
+              <Youtube className="w-7 h-7 md:w-8 md:h-8 lg:w-11 lg:h-11 xl:w-10 xl:h-10" />
             </Link>
           </div>
 
           {/* Título */}
-          <TypewriterTitle className='' text="CARROMATO" as="h1" size="text-6xl md:text-8xl lg:text-8xl lg:text-7xl " />
+          <TypewriterTitle className='' text="CARROMATO" as="h1" size="text-6xl md:text-8xl lg:text-6xl xl:text-7xl" />
 
           {/* Subtítulo */}
-          <p className=" w-full xl:w-[50vw] text-lg  md:text-2xl lg:text-3xl xl:text-xl  text-gray-300 leading-[0.9]  md:mb-2">
+          <p className=" w-full lg:w-[60vw] xl:w-[50vw] text-lg  md:text-2xl lg:text-3xl xl:text-xl  text-gray-300 leading-[0.9]  mb-2">
             Producción de contenido audiovisual para marcas, proyectos y artistas.
           </p>
 
           {/* Botones */}
-          <div className="flex flex-col justify-center md:justify-start items-center gap-2 md:gap-3 md:flex-row  md:mt-6 w-full">
+          <div className="flex flex-col justify-center md:justify-start items-center gap-2 md:gap-3 md:flex-row  md:mt-6  w-full lg:w-[60vw]">
             {[
               { href: "/servicios", label: "SERVICIOS AUDIOVISUALES" },
               { href: "/portfolio", label: "CONOCÉ NUESTRO TRABAJO" },
@@ -120,12 +120,12 @@ export default function HomeBanner() {
                 href={href}
                 className="w-full md:w-[33%] lg:w-60 xl:w-50 p-4 md:p-5 relative flex justify-center items-center md:aspect-[16/9] border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105"
               >
-                <span className="relative z-10 leading-[0.9] text-center text-sm md:text-xl lg:text-2xl  xl:text-[1rem] ">
+                <span className="relative z-10 leading-[0.9] text-center text-sm md:text-xl lg:text-1xl  xl:text-[1rem] ">
                   {label}
                 </span>
                 <ArrowRight
                   
-                  className="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-7 xl:h-7 absolute md:bottom-2 right-2 z-10 transition-transform duration-300 group-hover:translate-x-1"
+                  className="m-1 w-7 h-7 md:w-8 md:h-8 lg:w-8 lg:h-8 xl:w-7 xl:h-7 absolute md:bottom-2 right-2 z-10 transition-transform duration-300 group-hover:translate-x-1"
                 />
                 <span className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 animate-gradient-x rounded-md"></span>
               </Link>
@@ -133,10 +133,10 @@ export default function HomeBanner() {
           </div>
         </div>
 
-        {/* Barra lateral derecha */}s
+        {/* Barra lateral derecha */}
         
         <aside
-          className="absolute p-2 w-40 top-0 right-0 z-10 md:w-72 flex flex-col gap-1 text-white m-2 justify-center item-center"
+          className="absolute p-2 w-40 top-0 right-0 z-10 md:w-72 lg:w-[30vw] flex flex-col gap-1 text-white m-2 justify-center item-center"
           
         >
           {/* Cuadro mapa */}

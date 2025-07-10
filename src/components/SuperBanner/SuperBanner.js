@@ -11,9 +11,18 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
   const [displayedItem, setDisplayedItem] = useState(items[0]);
   const [nextItem, setNextItem] = useState(items[0]);
   const [isFading, setIsFading] = useState(false);
-  const cardsContainerRef = useRef(null);
   const currentIndexRef = useRef(0);
   const intervalRef = useRef(null);
+  const scrollRef = useRef(null);
+  const animationRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const fadeTo = (item, index) => {
     setNextItem(item);
@@ -23,7 +32,6 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
       setIsFading(false);
       AOS.refresh();
     }, 500);
-
     if (typeof index === "number") {
       currentIndexRef.current = index;
     }
@@ -41,17 +49,30 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
     return () => clearInterval(intervalRef.current);
   }, [items]);
 
-  const handleMouseEnter = (item, index) => {
-    clearInterval(intervalRef.current);
-    fadeTo(item, index);
-  };
+  // Scroll infinito JS sin saltos ni reset
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
 
-  const handleMouseLeave = () => {
-    intervalRef.current = setInterval(nextAutoItem, 5000);
-  };
+    if (!isMobile) return;
+
+    let speed = 0.5;
+
+    const scroll = () => {
+      container.scrollLeft += speed;
+      if (container.scrollLeft >= container.scrollWidth - container.clientWidth) {
+        container.scrollLeft = 0;
+      }
+      animationRef.current = requestAnimationFrame(scroll);
+    };
+
+    animationRef.current = requestAnimationFrame(scroll);
+
+    return () => cancelAnimationFrame(animationRef.current);
+  }, [isMobile]);
 
   return (
-    <div className="w-full relative h-[90vh] lg:h-[90vh] overflow-hidden flex flex-col justify-end text-white">
+    <div className="w-full relative h-[90vh] overflow-hidden flex flex-col justify-end text-white">
 
       {/* Imagen actual */}
       <div
@@ -84,9 +105,9 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
 
       {/* Contenido */}
       {!isFading && (
-        <div className="relative z-10 flex flex-col gap-2 max-w-5xl mb-5 p-3 xl:px-12  xl:justify-center" key={displayedItem.slug}>
+        <div className="relative z-10 flex flex-col gap-1 max-w-5xl mb-5 p-3 md:p-10 md:mb-40 xl:pl-40 xl:mb-10 xl:px-12 xl:justify-center" key={displayedItem.slug}>
           <p
-            className="text-xl font-light text-white/80 tracking-wide"
+            className="text-xl md:text-2xl font-light text-white/80 tracking-wide pl-2"
             data-aos="fade-down"
             data-aos-delay="100"
           >
@@ -94,15 +115,15 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
           </p>
 
           <div data-aos="fade-down" data-aos-delay="200">
-            <TypewriterTitle text={nextItem.title} as="h1" size="text-5xl lg:text-6xl leading-[0.9]" loop={false} />
+            <TypewriterTitle text={nextItem.title} as="h1" size="text-5xl md:text-7xl lg:text-6xl leading-[0.9] mt-0 pt-1" loop={false} />
           </div>
 
-          <div data-aos="fade-down" data-aos-delay="300">
+          <div className='items-end' data-aos="fade-down" data-aos-delay="300">
             <Link
               href={nextItem.slug}
               className="relative flex justify-center items-center p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-56 mt-4"
             >
-              <span className="relative z-10 leading-[0.9] text-center">Ver servicio</span>
+              <span className="relative z-10 leading-[0.9] text-center md:text-xl">Ver servicio</span>
               <ArrowRight
                 size={20}
                 className="m-1 z-10 transition-transform duration-300 group-hover:translate-x-1"
@@ -114,17 +135,44 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
       )}
 
       {/* Cards slider */}
-      <div
-        ref={cardsContainerRef}
-        className="relative z-10 flex flex-row gap-2 lg:gap-4 pt-6 pb-5 overflow-x-auto scrollbar-hide md:justify-center md:items-center"
-      >
-        {items.map((item, index) => (
+      {/* Mobile: scroll infinito controlado con JS */}
+      <div className="w-full overflow-hidden md:hidden z-100">
+        <div
+          ref={scrollRef}
+          className="flex flex-row gap-2 pt-6 pb-5 overflow-x-auto scrollbar-hide"
+          style={{ scrollBehavior: "auto" }}
+        >
+          {items.concat(items).map((item, i) => (
+            <Link
+              href={item.slug}
+              key={`${item.slug}-${i}`}
+              className="group relative flex-shrink-0 w-48 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+              style={{
+                backgroundImage: `url(${item.video})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            >
+              <div
+                className="absolute inset-0 transition duration-300 md:group-hover:bg-black/30"
+                style={{ backgroundColor: isMobile ? "transparent" : "rgba(0,0,0,0.5)" }}
+              />
+              <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center text-sm font-medium text-white">
+                <span>{item.title}</span>
+                <ArrowRight size={16} />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop: todas las cards visibles sin animación */}
+      <div className="w-full p-5 relative z-10 hidden md:flex flex-wrap md:wrap-3 gap-2 lg:gap-4 pt-6 pb-5 justify-center items-center">
+        {items.map((item) => (
           <Link
             href={item.slug}
             key={item.slug}
-           
-            
-            className="group relative flex-shrink-0 w-48 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+            className="group relative flex-shrink-0 w-52 lg:w-60 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
             style={{
               backgroundImage: `url(${item.video})`,
               backgroundSize: "cover",
@@ -132,7 +180,7 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
             }}
           >
             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition duration-300" />
-            <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center text-sm font-medium">
+            <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center text-sm font-medium text-white">
               <span>{item.title}</span>
               <ArrowRight size={16} />
             </div>
