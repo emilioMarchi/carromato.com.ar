@@ -23,10 +23,10 @@ export default function ServiceHeader({ item }) {
   }, []);
 
   return (
-    <div className="w-full pt-20 flex flex-col md:flex-row justify-between items-center gap-4 py-4 bg-black/60 text-white backdrop-blur-lg border-b border-white/10">
+    <div className="w-full pt-20 flex flex-col md:flex-row justify-between items-center gap-4 lg:px-15 py-4 bg-black/60 text-white backdrop-blur-lg border-b border-white/10">
       {/* Izquierda */}
       <div className="flex flex-col gap-1 md:gap-2 max-w-xl px-4">
-        <p>Servicio</p>
+        <p>SERVICIO</p>
         <TypewriterTitle text={item.title} as="h1" size="text-4xl md:text-6xl" loop={false} />
         <p className="text-sm md:text-base text-white/70">{item.description}</p>
         <div className="flex items-center gap-4 text-xs md:text-sm text-white/50 mt-1">

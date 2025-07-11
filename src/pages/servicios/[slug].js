@@ -67,6 +67,7 @@ export default function Service() {
     ? slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
     : "Servicio";
 
+    if(!selectedService){return null}
   return (
     <div
       className={`${geistSans.className} ${geistMono.className} min-h-screen`}
@@ -75,9 +76,8 @@ export default function Service() {
     >
       <main className="flex flex-col items-center ">
         
-        {selectedService && (
-          <ServiceHeader item={selectedService} />
-        )}
+        <ServiceHeader item={selectedService} />
+        
         <ServiceBanner slug={slug} items={ModelPortfolioItems} />
         <SliderComponent items={ModelPortfolioItems} />
      

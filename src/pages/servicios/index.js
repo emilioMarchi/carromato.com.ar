@@ -26,31 +26,31 @@ const servicesCardsItems = [
 ]
 const portfolioCardsItems = [
   { 
-    slug: "video-empresarial",
+    slug: "servicios/video-empresarial",
     title: "Institucional EmpresaTech",
     description: "Video institucional para presentación corporativa de EmpresaTech.",
     video: "https://pandoramarketing.net/wp-content/uploads/2020/10/200.gif"
   },
   { 
-    slug: "publicidad",
+    slug: "servicios/publicidad",
     title: "Campaña Primavera 2025",
     description: "Serie de spots publicitarios para redes sociales de MarcaNova.",
     video: "https://miraveo.es/wp-content/uploads/2024/05/GIF1-ezgif.com-optimize-1.gif"
   },
   { 
-    slug: "videoclips",
+    slug: "servicios/videoclips",
     title: "Videoclip 'Horizonte'",
     description: "Producción audiovisual para la banda Prisma en exteriores.",
     video: "https://static.wixstatic.com/media/ddca6c_33587a47b836449ea3534caccffc950b~mv2.gif"
   },
   { 
-    slug: "contenido-redes-sociales",
+    slug: "servicios/contenido-redes-sociales",
     title: "Contenido Verano CoolUp",
     description: "Reels y videos para la campaña estacional de CoolUp Bebidas.",
     video: "https://i.gifer.com/96e4.gif"
   },
   { 
-    slug: "fx-visuales",
+    slug: "servicios/fx-visuales",
     title: "Visuales Evento Lumina",
     description: "Motion graphics y visuales en vivo para festival Lumina 2025.",
     video: "https://byimpetus.com/wp-content/uploads/2025/02/dreamteam-ezgif.com-optimize.gif"
