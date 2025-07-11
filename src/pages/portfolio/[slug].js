@@ -52,7 +52,7 @@ export default function Work() {
 
     }
     console.log(proyectSelected)
-  }, [proyectSelected])
+  }, [proyectSelected, slug])
 
   if(proyectSelected===undefined || proyectSelected===null ){return null}
 

@@ -24,11 +24,11 @@ export default function WorkPageSection({ project }) {
 
 
       {/* Contenedor principal: info técnica + galería */}
-      <div className="flex flex-col md:flex-row border-t border-white/10">
+      <div className="flex flex-col md:flex-row border-t border-white/10 lg:px-10">
         <div className="w-full md:w-[100%] flex flex-col md:flex-row p-3 gap-4">
           
           {/* Info técnica */}
-          <div className="flex-[3] flex flex-row justify-between gap-4 m-10">
+          <div className="flex-[3] flex flex-wrap lg:flex-nowrap justify-between gap-4 m-2 md:m-10 ">
             <div>
               <h3 className="text-white text-xl font-semibold mb-3">Ficha técnica</h3>
               <ul className="flex flex-col gap-2 text-sm text-gray-300">
@@ -44,7 +44,7 @@ export default function WorkPageSection({ project }) {
 
             {/* Resumen */}
             {project.summary && (
-              <div className="text-gray-400 text-sm leading-relaxed border-t border-white/10 pt-3 m-5">
+              <div className="text-gray-400 text-lg lg:text-sm leading-[1.1] border-t border-white/10 pt-3">
                 {project.summary}
               </div>
             )}
