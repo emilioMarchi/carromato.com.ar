@@ -29,7 +29,7 @@ export default function AboutTextSection() {
             data-aos-delay="100"
           />
           <p
-            className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-prose mx-auto md:mx-0"
+            className="text-lg md:text-xl text-gray-300 leading-[0.9] max-w-prose mx-auto md:mx-0"
             data-aos="fade-up"
             data-aos-delay="300"
           >
@@ -40,7 +40,7 @@ export default function AboutTextSection() {
         {/* Derecha: segundo párrafo */}
         <div className="md:w-1/2 text-center md:text-left flex items-center">
           <p
-            className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-prose mx-auto md:mx-0"
+            className="text-lg md:text-xl text-gray-300 leading-[0.9] max-w-prose mx-auto md:mx-0"
             data-aos="fade-up"
             data-aos-delay="500"
           >

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import React from "react";
 
 export function TypewriterTitle({
   text = "",
@@ -18,23 +19,20 @@ export function TypewriterTitle({
   const [currentText, setCurrentText] = useState(text);
   const [isTyping, setIsTyping] = useState(true);
 
-  // Detectar cambio de texto y actualizar currentText para manejar el reseteo con control
   useEffect(() => {
     if (text !== currentText) {
-      // Iniciar proceso de tipeo para nuevo texto
-      setIsTyping(false); // Parar la animación actual
+      setIsTyping(false);
       setTimeout(() => {
         setCurrentText(text);
         setIndex(0);
         setIsDeleting(false);
         hasFinished.current = false;
-        setIsTyping(true); // Reanudar tipeo
-      }, 50); // delay muy corto para evitar parpadeo abrupto
+        setIsTyping(true);
+      }, 50);
     }
   }, [text, currentText]);
 
   useEffect(() => {
-    // IntersectionObserver: activa el efecto cuando el elemento es visible
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -98,9 +96,23 @@ export function TypewriterTitle({
   return (
     <Tag
       ref={elementRef}
-      className={`${size} font-extrabold uppercase tracking-wide ${className}`}
+      className={`${size} font-extrabold uppercase tracking-wide whitespace-pre-line ${className}`}
     >
-      {displayedText || (isTyping ? "" : text)}
+      {displayedText.length > 0
+        ? displayedText.split("\n").map((line, i, arr) => (
+            <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+            </React.Fragment>
+          ))
+        : !isTyping
+        ? text.split("\n").map((line, i, arr) => (
+            <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+            </React.Fragment>
+          ))
+        : ""}
       {(loop || index < currentText.length) && isVisible && (
         <span className="animate-pulse">|</span>
       )}

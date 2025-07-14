@@ -127,9 +127,10 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
   return (
     <Wrapper
       {...wrapperProps}
-      className={`relative group w-full md:w-[220px] xl:w-[30%] aspect-video p-3 rounded-2xl flex flex-col ${
+      className={`relative group aspect-video p-3 rounded-2xl flex flex-col ${
         mode === "portfolio" ? "justify-end" : "justify-center"
-      } border border-white/20 overflow-hidden transition-transform duration-300 ease-in-out ${interactiveClasses} backdrop-blur-sm`}
+      } border border-white/20 overflow-hidden transition-transform duration-300 ease-in-out ${interactiveClasses} backdrop-blur-sm
+      w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(30%-1rem)] min-w-[200px]`}
       data-aos="fade-in"
       data-aos-delay={`${index * 150}`}
     >
@@ -162,7 +163,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
       )}
 
       {/* Contenido */}
-      <div className="relative z-20 flex flex-col gap-1 px-2 pb-3 text-center">
+      <div className="relative z-20 flex flex-col gap-1 px-2 pb-3 w-full">
         <TypewriterTitle
           text={item.title}
           as="h3"

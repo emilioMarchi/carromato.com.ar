@@ -105,9 +105,9 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
 
       {/* Contenido */}
       {!isFading && (
-        <div className="relative z-10 flex flex-col gap-1 max-w-5xl mb-5 p-3 md:p-10 md:mb-40 xl:pl-40 xl:mb-10 xl:px-12 xl:justify-center" key={displayedItem.slug}>
+        <div className="relative z-10 flex flex-col gap-1 max-w-5xl mb-5 p-3 md:p-10  xl:pl-40 xl:mb-[3rem] xl:px-12 xl:justify-center" key={displayedItem.slug}>
           <p
-            className="text-xl md:text-2xl font-light text-white/80 tracking-wide pl-2"
+            className="text-xl md:text-2xl lg:text-lg font-light text-white/80 tracking-wide pl-2"
             data-aos="fade-down"
             data-aos-delay="100"
           >
@@ -115,15 +115,15 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
           </p>
 
           <div data-aos="fade-down" data-aos-delay="200">
-            <TypewriterTitle text={nextItem.title} as="h1" size="text-5xl md:text-7xl lg:text-6xl leading-[0.9] mt-0 pt-1" loop={false} />
+            <TypewriterTitle text={nextItem.title} as="h1" size="text-5xl md:text-7xl lg:text-5xl xl:text-6xl ipadpro:m-[20rem] leading-[0.9] mt-0 pt-1" loop={false} />
           </div>
 
           <div className='items-end' data-aos="fade-down" data-aos-delay="300">
             <Link
               href={nextItem.slug}
-              className="relative flex justify-center items-center p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-56 mt-4"
+              className="relative flex justify-center items-center p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-56 mt-4 "
             >
-              <span className="relative z-10 leading-[0.9] text-center md:text-xl">Ver servicio</span>
+              <span className="relative z-10 leading-[0.9] text-center md:text-xl lg:text-lg">Ver servicio</span>
               <ArrowRight
                 size={20}
                 className="m-1 z-10 transition-transform duration-300 group-hover:translate-x-1"
@@ -167,12 +167,12 @@ export default function SuperBanner({ items, subtitle = "SERVICIOS AUDIOVISUALES
       </div>
 
       {/* Desktop: todas las cards visibles sin animación */}
-      <div className="w-full p-5 relative z-10 hidden md:flex flex-wrap md:wrap-3 gap-2 lg:gap-4 pt-6 pb-5 justify-center items-center">
+      <div className="w-full  p-5 relative z-10 hidden md:flex flex-wrap md:wrap-3 gap-2 lg:gap-4 pt-6 pb-5 justify-center items-center">
         {items.map((item) => (
           <Link
             href={item.slug}
             key={item.slug}
-            className="group relative flex-shrink-0 w-52 lg:w-60 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
+            className="group relative flex-shrink-0 w-52 lg:w-40 aspect-video rounded-md border border-white/20 overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-105"
             style={{
               backgroundImage: `url(${item.video})`,
               backgroundSize: "cover",
