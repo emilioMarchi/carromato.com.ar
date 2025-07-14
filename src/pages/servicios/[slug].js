@@ -8,12 +8,11 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import ItemsListGrid from "@/components/itemsListGrid/ItemsListGrid";
 import SliderComponent from "@/components/SliderComponent/SliderComponent";
-import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
-import { Video, Megaphone, Film, MonitorPlay, Sparkles } from "lucide-react";
-import SuperBanner from "@/components/SuperBanner/SuperBanner";
-import { ModelPortfolioItems, ModelServicesItems } from "@/data/dataModels"; // 👉 import de servicios
+import { FAQContactSection } from "@/components/FAQContactSection/FAQContactSection";
+import { ModelPortfolioItems, ModelServicesItems } from "@/data/dataModels";
 import ServiceHeader from "@/components/ServiceHeader/ServiceHeader";
-import ServiceBanner from "@/components/ServiceBanner/ServiceBanner"
+import ServiceBanner from "@/components/ServiceBanner/ServiceBanner";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,65 +23,35 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const serviceDetails = [
-  { 
-    title: "Este servicio ofrece soluciones personalizadas para mejorar la comunicación visual de tu marca."
-  },
-  { 
-    title: "Trabajamos con tecnología de última generación para garantizar la mejor calidad en cada proyecto."
-  },
-  { 
-    title: "Nuestro equipo creativo se adapta a tus necesidades para generar contenido impactante y efectivo."
-  },
-  { 
-    title: "Acompañamos todo el proceso, desde la planificación hasta la entrega final, asegurando la satisfacción total."
-  },
-  { 
-    title: "Ofrecemos asesoramiento profesional para optimizar la difusión y el alcance de tus campañas."
-  },
-];
-
-const ModelSliderCardsItems = [
-  // ... tu contenido actual
-];
-
 export default function Service() {
   const router = useRouter();
   const { slug } = router.query;
 
   const [selectedService, setSelectedService] = useState(null);
 
-  // Buscar servicio cuando cambia el slug
   useEffect(() => {
     if (slug) {
-      const foundService = ModelServicesItems.find(
-        (item) => item.slug.endsWith(slug)
+      const foundService = ModelServicesItems.find((item) =>
+        item.slug.endsWith(slug)
       );
       setSelectedService(foundService);
     }
-  }, [slug]);
+  }, [slug, router.asPath]);
 
-  // Convertir slug a título bonito
-  const formattedTitle = slug
-    ? slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())
-    : "Servicio";
+  if (!selectedService) return null;
 
-    if(!selectedService){return null}
   return (
     <div
+      key={router.asPath} // Aquí el key fuerza remount completo del componente
       className={`${geistSans.className} ${geistMono.className} min-h-screen`}
       data-aos="fade-down"
       data-aos-delay="200"
     >
-      <main className="flex flex-col items-center ">
-        
+      <main className="flex flex-col items-center">
         <ServiceHeader item={selectedService} />
-        
         <ServiceBanner slug={slug} items={ModelPortfolioItems} />
         <SliderComponent items={ModelPortfolioItems} />
-     
         <FAQContactSection />
-
       </main>
 
       <style jsx>{`

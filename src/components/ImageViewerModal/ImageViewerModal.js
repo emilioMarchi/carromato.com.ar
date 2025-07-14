@@ -42,10 +42,10 @@ export default function ImageViewerModal() {
       {/* Cerrar */}
       <button
         onClick={handleViewerClose}
-        className="absolute top-4 right-4 text-white bg-black/70 rounded-full p-2 hover:bg-orange-400 transition"
+        className="absolute top-10 right-4 text-white bg-black/70 rounded-full cursor-pointer p-2 hover:bg-orange-400 transition"
         aria-label="Cerrar"
       >
-        <X size={26} />
+        <X size={30} />
       </button>
 
       {/* Contenedor imagen fija */}

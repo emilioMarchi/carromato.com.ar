@@ -31,7 +31,7 @@ export default function BannerPanelData() {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden bg-black  md:h-[60vh] lg:h-[90vh] flex flex-col justify-center pt-5">
+    <div className="relative w-full overflow-hidden bg-black  md:h-[60vh] lg:h-[90vh] flex flex-col justify-center pt-10">
 
       {/* Video fondo */}
       <div className="absolute inset-0 z-0">

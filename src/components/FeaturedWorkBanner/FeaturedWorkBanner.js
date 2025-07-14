@@ -23,7 +23,7 @@ export default function FeaturedWorkBanner({ items = [], interval = 7000, mode =
   const currentItem = items[activeIndex];
 
   return (
-    <div className="overflow-hidden relative h-[90vh] md:h-[80vh] w-full md:px-10 lg:px-10">
+    <div className="overflow-hidden relative h-[90vh] md:h-[90vh] w-full md:px-10 lg:px-10">
       {/* Fondo con GIF */}
       <div
         className="absolute inset-0 h-full bg-center bg-cover transition-all duration-700"

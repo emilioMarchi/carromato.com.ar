@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 import { ArrowRight, CheckCircle, Film, Video, Play } from "lucide-react";
 import { TypewriterTitle } from "@/helpers/TypewriterEfect";
 import VideoPlayerModal from "@/components/VideoPlayerModal/VideoPlayerModal";
@@ -14,16 +15,16 @@ export default function ServiceBanner({ slug, items }) {
   const [currentVideoSrc, setCurrentVideoSrc] = useState(null);
   const { openVideo, isVideoOpen, videoSrc, closeVideo } = useProvider();
   const intervalRef = useRef(null);
+  const router = useRouter(); // 👉 agregamos el hook
 
   useEffect(() => {
-    
     if (slug) {
-      const found = ModelDetailServicesItems.find((item) =>
-        item.slug.endsWith(`/servicios/${slug}`) ||
-      item.slug.replace("/servicios/", "") === slug
-    );
-    setService(found);
-  
+      const found = ModelDetailServicesItems.find(
+        (item) =>
+          item.slug.endsWith(`/servicios/${slug}`) ||
+          item.slug.replace("/servicios/", "") === slug
+      );
+      setService(found);
     }
   }, [slug]);
 
@@ -40,9 +41,10 @@ export default function ServiceBanner({ slug, items }) {
 
   const currentItem = items[currentItemIndex];
 
-  const handleOpenVideo = () => {
-    openVideo(currentItem.video)
-
+  const handleGoToProject = () => {
+    if (currentItem?.slug) {
+      router.push(`/${currentItem.slug}`);
+    }
   };
 
   return (
@@ -64,17 +66,26 @@ export default function ServiceBanner({ slug, items }) {
             <span className="text-white/50">{service.title}</span>
           </div>
           <button
-            onClick={handleOpenVideo}
-            className="flex items-center gap-2 text-sm border border-white/30 px-3 py-1 rounded hover:bg-white/10 transition"
+            onClick={handleGoToProject}
+            className="relative flex items-center justify-center gap-2 p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-max"
           >
-            <Play size={16} /> Ver video
+            <span className="relative z-10">Ver proyecto</span>
+            <Play size={18} className="relative z-10" />
+            <span
+              className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 rounded-md gradient-animated"
+              style={{
+                background: 'linear-gradient(90deg, #7c3aed, #a78bfa, #c4b5fd)',
+              }}
+            />
           </button>
+
+
+
         </div>
       </div>
 
       {/* Contenido lado derecho */}
       <div className="relative z-10 flex flex-col justify-center gap-6 p-8 md:w-1/2 backdrop-blur-lg">
-        
         <p className="text-white/80 text-base md:text-lg">{service.description}</p>
 
         <div className="flex flex-col gap-3">
@@ -91,18 +102,22 @@ export default function ServiceBanner({ slug, items }) {
             Asesoramiento en difusión y publicación
           </div>
         </div>
-
         <a
           href="#contacto"
-          className="flex items-center gap-2 w-max mt-4 border border-white p-3 px-6 rounded-md hover:bg-white/10 transition"
+          className="relative flex items-center justify-center gap-2 p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-max"
         >
-          <span>Consultar</span>
-          <ArrowRight size={18} />
+          <span className="relative z-10">Consultar</span>
+          <ArrowRight size={18} className="relative z-10" />
+          <span
+            className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 rounded-md gradient-animated"
+            style={{
+              background: 'linear-gradient(90deg, #ea580c, #fca969, #fed7aa)',
+            }}
+          />
         </a>
+
+
       </div>
-
-      {/* Video Modal */}
-
     </div>
   );
 }

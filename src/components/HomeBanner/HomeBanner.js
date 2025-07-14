@@ -50,7 +50,7 @@ export default function HomeBanner() {
   }, [pathname]);
 
   return (
-    <div className="relative p-3 md:p-5 w-[100vw] overflowx-hidden">
+    <div className="relative p-3 md:p-5 w-[100vw] md:h-[75vh] xl:h-[100vh] overflowx-hidden">
       {/* Fondo GIF */}
       <div
         className="absolute inset-0 w-full h-full bg-center bg-cover transition-all duration-700 -z-10"
@@ -63,13 +63,13 @@ export default function HomeBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent z-0" />
 
       {/* Contenido principal */}
-      <div className="flex flex-col md:flex-row xl:p-4">
+      <div className="flex flex-col md:flex-row xl:p-4 md:h-full xl:pb-15">
         {/* Izquierda */}
         <div className="relative z-10 flex-1 flex flex-col justify-end text-white pt-20 p-2 lg:mr-[250px]">
           {/* Redes sociales */}
           <div className="flex gap-4 mb-2">
             <Link
-              href="https://www.instagram.com/carromato"
+              href="https://www.instagram.com/carromatoprods/?hl=es"
               target="_blank"
               className="text-white hover:text-orange-400 transition-colors duration-300"
               aria-label="Instagram"
@@ -85,7 +85,7 @@ export default function HomeBanner() {
               <Facebook className="w-7 h-7 md:w-8 md:h-8 lg:w-11 lg:h-11 xl:w-10 xl:h-10" />
             </Link>
             <Link
-              href="https://www.youtube.com/carromato"
+              href="https://www.youtube.com/channel/UCDyVOTieTNygeziympCUlAg/videos"
               target="_blank"
               className="text-white hover:text-orange-400 transition-colors duration-300"
               aria-label="YouTube"
@@ -103,7 +103,7 @@ export default function HomeBanner() {
           />
 
           {/* Subtítulo */}
-          <p className="w-full lg:w-[60vw] xl:w-[50vw] text-lg md:text-2xl lg:text-3xl xl:text-xl text-gray-300 leading-[0.9] mb-2">
+          <p className="w-full lg:w-[60vw] xl:w-[50vw] text-lg md:text-2xl lg:text-2xl xl:text-xl text-gray-300 leading-[0.9] mb-2">
             Producción de contenido audiovisual para marcas, proyectos y artistas.
           </p>
 

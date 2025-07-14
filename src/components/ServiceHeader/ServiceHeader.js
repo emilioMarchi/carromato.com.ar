@@ -27,7 +27,15 @@ export default function ServiceHeader({ item }) {
       {/* Izquierda */}
       <div className="flex flex-col gap-1 md:gap-2 max-w-xl px-4">
         <p>SERVICIO</p>
-        <TypewriterTitle text={item.title} as="h1" size="text-4xl md:text-6xl" loop={false} />
+        <TypewriterTitle
+          text={item.title}
+          as="h1"
+          size="text-4xl md:text-6xl"
+          loop={false}
+          className="text-white bg-gradient-to-r from-white via-purple-200 to-white text-gradient-animated"
+        />
+
+
         <p className="text-sm md:text-base text-white/70">{item.description}</p>
         <div className="flex items-center gap-4 text-xs md:text-sm text-white/50 mt-1">
           <span className="flex items-center gap-1">
@@ -41,7 +49,7 @@ export default function ServiceHeader({ item }) {
       <div className="flex items-center gap-4 px-4">
         <button
           onClick={() => setLiked(!liked)}
-          className={`p-2 rounded-full border border-white/20 transition hover:bg-white/10 ${
+          className={`p-2 rounded-full border border-orange-400 cursor-pointer transition hover:bg-white/10 ${
             liked ? "text-red-500" : "text-white"
           }`}
         >
@@ -50,7 +58,7 @@ export default function ServiceHeader({ item }) {
 
         <button
           onClick={() => alert("Contacto abierto")}
-          className="flex items-center gap-2 p-2 px-4 border border-white text-white text-sm rounded-md hover:bg-white/10 transition"
+          className="flex items-center gap-2 p-2 px-4 border border-orange-400 cursor-pointer text-white text-sm rounded-md hover:bg-white/10 transition"
         >
           <MessageCircle size={18} />
           <span>Contactar</span>
