@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import ItemsListGrid from "@/components/itemsListGrid/ItemsListGrid";
 import SliderComponent from "@/components/SliderComponent/SliderComponent";
-import { FAQContactSection } from "@/components/FAQContactSection/FAQContactSection";
+import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
 import { ModelPortfolioItems, ModelServicesItems } from "@/data/dataModels";
 import ServiceHeader from "@/components/ServiceHeader/ServiceHeader";
 import ServiceBanner from "@/components/ServiceBanner/ServiceBanner";
