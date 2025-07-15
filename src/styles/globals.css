@@ -28,20 +28,14 @@
 }
 @media (prefers-color-scheme: dark) {
   body, html {
-    background-color: #ffffff !important;
-    color: #000000 !important;
+    background-color: inherit !important;
+    color: inherit !important;
   }
 
-  /* También fuerza los elementos que se están oscureciendo */
-  .marker {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-  }
-
-  /* Si querés, podés forzar todos los divs o textos generales */
   * {
     background-color: transparent;
     color: inherit;
+    filter: none !important;
   }
 }
 
