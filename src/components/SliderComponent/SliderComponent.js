@@ -98,9 +98,9 @@ export default function SliderComponent({ items = [], title = "", titleDirection
                   text={item.title}
                   as="h3"
                   size="text-sm sm:text-base"
-                  className="font-semibold leading-snug bg-gradient-to-r from-white to-violet-400 bg-clip-text text-transparent drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] line-clamp-2"
+                  className="font-semibold leading-[1] text-white/70 bg-gradient-to-r from-white to-violet-400 bg-clip-text text-transparent drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] line-clamp-2"
                   loop={false}
-                  speed={140}
+                  speed={100}
                 />
                 <TypewriterTitle
                   text={item.category}

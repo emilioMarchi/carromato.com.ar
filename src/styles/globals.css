@@ -63,11 +63,11 @@ body {
   animation: gradient-x 4s ease infinite;
 }
 .text-gradient-animated {
-  background-size: 300% 300%;
-  animation: gradient-x 8s ease infinite;
-  background-clip: text;
+  @apply bg-clip-text;
+  background-image: linear-gradient(to right, #ffffff, #d8b4fe, #ffffff);
   -webkit-background-clip: text;
-  color: transparent;
+  color: #ffffff; /* fallback */
+  /* evitar text-transparent */
 }
 @layer utilities {
   @keyframes carousel-slide {

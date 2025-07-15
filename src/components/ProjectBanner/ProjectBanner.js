@@ -38,7 +38,7 @@ export default function ProjectBanner({ project }) {
 
       <div className="relative z-20 w-full max-w-7xl mx-auto p-6 flex flex-col gap-4">
         {/* Título arriba, ocupa todo el ancho */}
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[.9] text-white/40 gradient-text">
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[.9] text-white/80 gradient-text">
           {project.title}
         </h1>
 
@@ -56,7 +56,7 @@ export default function ProjectBanner({ project }) {
           <div className="flex gap-3 items-center flex-shrink-0">
             <button
               onClick={toggleLike}
-              className={`p-3 rounded-full cursor-pointer transition border-none gradient-button ${
+              className={`p-3 rounded-full bg-color-orange/60 cursor-pointer transition border-none gradient-button ${
                 liked ? "text-red-500" : "text-white"
               }`}
               aria-label="Like"
@@ -66,7 +66,7 @@ export default function ProjectBanner({ project }) {
 
             <button
               onClick={handleVideoPlayer}
-              className="p-3 rounded-full cursor-pointer transition border-none gradient-button text-white"
+              className="p-3 rounded-full bg-color-orange/60 cursor-pointer transition border-none gradient-button text-white"
               aria-label="Ver video"
             >
               <Play size={30} />
@@ -88,18 +88,14 @@ export default function ProjectBanner({ project }) {
           }
         }
 
-        .gradient-text {
-          background: linear-gradient(
-            270deg,
-            rgba(255, 255, 255, 1),
-            rgba(255, 156, 79, 0.6),
-            rgba(255, 255, 255, 1)
-          );
+       .gradient-text {
+          background: linear-gradient(...);
           background-size: 300% 300%;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           animation: gradient-x 6s ease infinite;
         }
+
 
         .gradient-button {
           background: linear-gradient(

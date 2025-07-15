@@ -167,8 +167,9 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
         <TypewriterTitle
           text={item.title}
           as="h3"
-          className={`font-semibold text-white/40 leading-[0.9] text-[1.7rem] md:text-[1rem] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
+          className={`font-semibold text-white/60 leading-[0.9] text-[1.7rem] md:text-[1rem] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)]`}
           loop={false}
+          speed={80}
         />
         {mode !== "items" && item.description && (
           <TypewriterTitle
