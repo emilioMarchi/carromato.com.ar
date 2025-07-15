@@ -45,7 +45,7 @@ export default function ProjectBanner({ project }) {
         {/* Detalles y botones abajo, en fila */}
         <div className="flex justify-between items-center">
           {/* Detalles técnicos */}
-          <div className="flex gap-1 p-1 text-sm text-white/80 flex-wrap">
+          <div className="flex gap-3 p-1 text-sm text-white/80 flex-wrap">
             {project.technicalData.map((item) => {
               if (item.label === "Cliente" || item.label === "Formato") return null;
               return <span key={item.label}>{item.value}</span>;

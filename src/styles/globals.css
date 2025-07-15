@@ -70,17 +70,23 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(
-    270deg,
-    rgba(255, 255, 255, 1),
-    rgba(255, 172, 109, 0.842),
-    rgba(255, 255, 255, 1)
-  );
-  background-size: 300% 300%;
+  background: linear-gradient(270deg, #ffffff, #ffa274, #ffdbb5);
+  background-size: 600% 600%;
   -webkit-background-clip: text;
-  background-clip: text;
-  color: #ffffff;
-  animation: gradient-x 6s ease infinite;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 
@@ -113,12 +119,25 @@ body {
   animation: gradient-x 4s ease infinite;
 }
 .text-gradient-animated {
-  @apply bg-clip-text;
-  background-image: linear-gradient(to right, #ffffff, #d8b4fe, #ffffff);
+  background: linear-gradient(270deg, #ffffff, #a3acff, #ffffff);
+  background-size: 800% 800%;
   -webkit-background-clip: text;
-  color: #ffffff; /* fallback */
-  /* evitar text-transparent */
+  -webkit-text-fill-color: transparent;
+  animation: violetShift 6s ease infinite;
 }
+
+@keyframes violetShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @layer utilities {
   @keyframes carousel-slide {
     0% {

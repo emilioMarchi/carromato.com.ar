@@ -69,12 +69,12 @@ export default function ServiceBanner({ slug, items }) {
             onClick={handleGoToProject}
             className="relative flex items-center justify-center gap-2 p-3 px-5 border border-white text-white text-base font-medium rounded-md overflow-hidden group transition-all duration-300 hover:scale-105 w-max"
           >
-            <span className="relative z-10">Ver proyecto</span>
+            <span className="relative z-10 cursor-pointer leading-[0.9]">Ver proyecto</span>
             <Play size={18} className="relative z-10" />
             <span
-              className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 rounded-md gradient-animated"
+              className="absolute inset-0 opacity-30 group-hover:opacity-25 transition duration-500 rounded-md gradient-animated"
               style={{
-                background: 'linear-gradient(90deg, #7c3aed, #a78bfa, #c4b5fd)',
+                background: 'linear-gradient(90deg, #a78bfa, #c4b5fd)',
               }}
             />
           </button>
@@ -109,9 +109,9 @@ export default function ServiceBanner({ slug, items }) {
           <span className="relative z-10">Consultar</span>
           <ArrowRight size={18} className="relative z-10" />
           <span
-            className="absolute inset-0 opacity-30 group-hover:opacity-50 transition duration-500 rounded-md gradient-animated"
+            className="absolute inset-0 opacity-30 group-hover:opacity-25transition duration-500 rounded-md gradient-animated"
             style={{
-              background: 'linear-gradient(90deg, #ea580c, #fca969, #fed7aa)',
+              background: 'linear-gradient(90deg, #fca969, #fed7aa)',
             }}
           />
         </a>

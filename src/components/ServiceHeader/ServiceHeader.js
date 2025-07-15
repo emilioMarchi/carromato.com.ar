@@ -32,7 +32,7 @@ export default function ServiceHeader({ item }) {
           as="h1"
           size="text-4xl md:text-6xl"
           loop={false}
-          className="text-white bg-gradient-to-r from-white via-purple-200 to-white text-gradient-animated"
+          className="text-white  text-gradient-animated"
         />
 
 
