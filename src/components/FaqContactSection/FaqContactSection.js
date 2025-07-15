@@ -1,23 +1,66 @@
 import { useState } from "react";
 import Link from "next/link";
 
+
+
+
 export function ContactForm() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [notification, setNotification] = useState({ show: false, message: "", type: "success" });
+  const [loading, setLoading] = useState(false); // 👈 nuevo estado loading
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    setLoading(true); // 👉 empieza loading
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setNotification({ show: true, message: "Consulta enviada correctamente ✅", type: "success" });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setNotification({ show: true, message: "Error al enviar la consulta ⚠️", type: "error" });
+      }
+    } catch (err) {
+      console.error(err);
+      setNotification({ show: true, message: "Hubo un error al enviar ⚠️", type: "error" });
+    }
+
+    setLoading(false); // 👉 termina loading
+    setTimeout(() => setNotification({ show: false, message: "", type: "success" }), 3000);
   };
 
   return (
-    <div data-aos="fade-left" data-aos-delay="400" className="h-[450px] relative bg-black rounded-lg p-8 overflow-hidden">
+    <div
+      data-aos="fade-left"
+      data-aos-delay="400"
+      className="h-auto relative bg-black rounded-lg p-8 overflow-hidden"
+    >
       <div className="absolute inset-0 bg-gradient-to-tr from-black via-black to-transparent opacity-70 animate-gradient" />
-      <form onSubmit={handleSubmit} className="relative space-y-6 text-white z-10">
+
+      <form onSubmit={handleSubmit} className="relative space-y-6 text-white z-10 flex flex-col">
+        {/* Notificación */}
+        {notification.show && (
+          <div
+            className={`mb-4 px-4 py-2 rounded-md border text-sm font-medium backdrop-blur-sm
+              ${notification.type === "success" ? "border-green-400 text-green-400" : "border-red-400 text-red-400"}`}
+          >
+            {notification.message}
+          </div>
+        )}
+
         <div>
           <label htmlFor="name" className="block text-sm font-medium mb-1">Nombre</label>
           <input
@@ -30,6 +73,7 @@ export function ContactForm() {
             className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
+
         <div>
           <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
           <input
@@ -42,6 +86,7 @@ export function ContactForm() {
             className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
+
         <div>
           <label htmlFor="message" className="block text-sm font-medium mb-1">Mensaje</label>
           <textarea
@@ -54,16 +99,25 @@ export function ContactForm() {
             className="w-full px-4 py-2 bg-black bg-opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
+
         <button
           type="submit"
-          className="inline-block text-white font-bold uppercase underline underline-offset-4 decoration-2 decoration-white transition-transform duration-300 hover:scale-105 hover:text-yellow-500 hover:decoration-yellow-500"
+          disabled={loading}
+          className={`mt-auto inline-flex items-center justify-center gap-2 text-white font-bold uppercase underline underline-offset-4 decoration-2 decoration-white transition-transform duration-300 ${
+            loading ? "opacity-50 cursor-not-allowed" : "hover:scale-105 hover:text-yellow-500 hover:decoration-yellow-500"
+          }`}
         >
-          Enviar Consulta
+          {loading ? (
+            <span className="inline-block w-5 h-5 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin"></span>
+          ) : (
+            "Enviar Consulta"
+          )}
         </button>
       </form>
     </div>
   );
 }
+
 
 export function FAQContactSection({ faqs = [{ question: "¿Cuánto tarda un proyecto audiovisual?", answer: "El tiempo varía según la complejidad, pero generalmente entregamos en 2 a 4 semanas." },
   { question: "¿Ofrecen servicios para redes sociales?", answer: "Sí, creamos contenido específico para diferentes plataformas como Instagram, TikTok y YouTube." },
