@@ -136,7 +136,7 @@ export default function HomeBanner() {
           className="
             relative md:absolute 
             bottom-0 md:top-0 md:right-0
-            w-full md:w-72
+            w-full md:w-72 xl:w-[35vw]
 
             rounded-t-xl md:rounded-l-xl
             p-4

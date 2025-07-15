@@ -66,11 +66,11 @@ export default function BannerPanelData() {
         {/* Mapa */}
         <div
           ref={mapContainer}
-          className="w-full md:w-64 h-48 rounded-2xl border border-white/20 shadow-lg"
+          className="w-full md:w-64 xl:w-[30vw] h-48 rounded-2xl border border-white/20 shadow-lg"
         />
 
         {/* Cajas de info */}
-        <div className="flex flex-col gap-2 w-full md:w-64  mt-2">
+        <div className="flex flex-col gap-2 w-full md:w-64 xl:w-[30vw]  mt-2">
           {/* Caja 1 */}
           <div className="flex items-center gap-2 border border-white/20 rounded-2xl p-3 backdrop-blur-sm w-full">
             <MapPin className="w-7 h-7 text-orange-200" />

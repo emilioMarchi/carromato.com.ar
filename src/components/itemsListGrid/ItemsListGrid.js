@@ -130,7 +130,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
       className={`relative group aspect-video p-3 rounded-2xl flex flex-col ${
         mode === "portfolio" ? "justify-end" : "justify-center"
       } border border-white/20 overflow-hidden transition-transform duration-300 ease-in-out ${interactiveClasses} backdrop-blur-sm
-      w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(30%-1rem)] min-w-[200px]`}
+      w-[95vw] md:w-[30%]`}
       data-aos="fade-in"
       data-aos-delay={`${index * 150}`}
     >
