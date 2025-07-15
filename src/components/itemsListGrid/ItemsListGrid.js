@@ -154,7 +154,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
       {/* Luz blur */}
       {mode === "servicios" && (
         <div
-          className={`absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 rounded-full blur-3xl opacity-50 pointer-events-none transition-all duration-300 group-hover:w-36 group-hover:h-36 ${
+          className={`absolute text-white top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 rounded-full blur-3xl opacity-50 pointer-events-none transition-all duration-300 group-hover:w-36 group-hover:h-36 ${
             index % 2 === 0
               ? "bg-gradient-to-br from-violet-400 to-transparent"
               : "bg-gradient-to-br from-orange-400 to-transparent"
@@ -167,7 +167,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
         <TypewriterTitle
           text={item.title}
           as="h3"
-          className={`font-semibold leading-[0.9] text-[1.7rem] md:text-[1rem] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
+          className={`font-semibold text-white-40 leading-[0.9] text-[1.7rem] md:text-[1rem] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
           loop={false}
         />
         {mode !== "items" && item.description && (
