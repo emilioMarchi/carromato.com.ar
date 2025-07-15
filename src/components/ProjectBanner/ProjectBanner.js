@@ -38,9 +38,9 @@ export default function ProjectBanner({ project }) {
 
       <div className="relative z-20 w-full max-w-7xl mx-auto p-6 flex flex-col gap-4">
         {/* Título arriba, ocupa todo el ancho */}
-        <h2 className="text-3xl md:text-5xl font-extrabold leading-[.9] gradient-text">
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[.9] text-white/40 gradient-text">
           {project.title}
-        </h2>
+        </h1>
 
         {/* Detalles y botones abajo, en fila */}
         <div className="flex justify-between items-center">
