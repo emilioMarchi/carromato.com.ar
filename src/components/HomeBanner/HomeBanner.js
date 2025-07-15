@@ -30,24 +30,50 @@ export default function HomeBanner() {
 
   useEffect(() => {
     if (!mapInstance.current && mapContainer.current) {
-      mapInstance.current = new maplibregl.Map({
+      const map = new maplibregl.Map({
         container: mapContainer.current,
-        style:
-          "https://api.maptiler.com/maps/streets/style.json?key=nK1d2De6d23VzpHvim46",
-        center: [-58.4449133, -34.5886786], // Buenos Aires coords
-        zoom: 11,
+        style: "https://api.maptiler.com/maps/streets/style.json?key=nK1d2De6d23VzpHvim46",
+        center: [-58.4449133, -34.5886786],
+        zoom: 12,
         interactive: true,
         attributionControl: false,
       });
-
-      new maplibregl.Marker()
+  
+      mapInstance.current = map;
+  
+      // Popup con imagen + texto + link limpio
+      const popupHTML = `
+        <div style="display: flex; align-items: center; gap: 8px; background: white; color: black; padding: 8px 12px; border-radius: 6px; font-weight: bold; box-shadow: 0 2px 6px rgba(0,0,0,0.2); max-width: 240px;">
+          <img src="/logo.jpg" alt="Carromato Logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid #ccc;" />
+          <div style="display: flex; flex-direction: column;">
+            <div style="margin-bottom: 2px;">📍 Carromato</div>
+            <a href="https://maps.app.goo.gl/yxZLg1woi5RTYmfq5" target="_blank"
+               style="font-weight: normal; font-size: 0.85rem; color: #E60023; border:none; text-decoration: none; background: transparent; padding: 0; margin: 0;">
+               Ver en Google Maps
+            </a>
+          </div>
+        </div>
+      `;
+  
+      const popup = new maplibregl.Popup({
+        offset: 25,
+        closeButton: false,
+        closeOnClick: false,
+      })
         .setLngLat([-58.4449133, -34.5886786])
-        .addTo(mapInstance.current);
+        .setHTML(popupHTML)
+        .addTo(map);
+  
+      // Marker simple
+      new maplibregl.Marker({ color: "#E60023" })
+        .setLngLat([-58.4449133, -34.5886786])
+        .addTo(map);
     } else if (mapInstance.current) {
-      // Forzar resize al cambiar ruta para que el mapa se renderice bien
       mapInstance.current.resize();
     }
   }, [pathname]);
+  
+  
 
   return (
     <div className="relative p-3 md:p-5 w-[100vw] md:h-[75vh] xl:h-[100vh] overflowx-hidden">
@@ -131,34 +157,21 @@ export default function HomeBanner() {
           </div>
         </div>
 
-        {/* Barra lateral derecha con responsive */}
-        <aside
-          className="
-            relative md:absolute 
-            bottom-0 md:top-0 md:right-0
-            w-full md:w-72 xl:w-[35vw]
-
-            rounded-t-xl md:rounded-l-xl
-            p-4
-            flex flex-col
-            gap-2
-            z-20
-          "
-        >
-          {/* Cuadro mapa */}
+        {/* Barra lateral derecha */}
+        <aside className="relative md:absolute bottom-0 md:top-0 md:right-0 w-full md:w-72 xl:w-[35vw] rounded-t-xl md:rounded-l-xl p-4 flex flex-col gap-2 z-20">
+          {/* Mapa */}
           <div className="relative rounded-md border border-white/20 bg-black/40 p-2 flex flex-col">
             <div
               ref={mapContainer}
               className="aspect-video rounded-md overflow-hidden w-full"
             />
-            {/* Info ubicación */}
             <div className="flex items-center gap-2 mt-2 text-sm font-semibold text-white leading-[0.9]">
               <MapPin className="w-7 h-7 md:w-8 md:h-8 lg:w-9 lg:h-9" />
               <span>Buenos Aires, Argentina</span>
             </div>
           </div>
 
-          {/* Cuadro info grabación */}
+          {/* Info filmación */}
           <div className="relative rounded-md border border-white/20 bg-black/40 p-2 md:p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
               text="+5000 hs de filmación"
@@ -166,7 +179,7 @@ export default function HomeBanner() {
             />
           </div>
 
-          {/* Cuadro proyectos realizados */}
+          {/* Proyectos */}
           <div className="relative rounded-md border border-white/20 bg-black/40 p-2 md:p-4 flex flex-col justify-center items-center text-center">
             <TypewriterText
               text="+100 proyectos realizados"
