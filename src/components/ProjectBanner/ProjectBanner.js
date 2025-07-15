@@ -38,7 +38,7 @@ export default function ProjectBanner({ project }) {
 
       <div className="relative z-20 w-full max-w-7xl mx-auto p-6 flex flex-col gap-4">
         {/* Título arriba, ocupa todo el ancho */}
-        <h1 className="text-3xl md:text-5xl font-extrabold leading-[.9] text-white/80 gradient-text">
+        <h1 className="text-3xl md:text-5xl font-extrabold leading-[.9] text-white gradient-text">
           {project.title}
         </h1>
 
