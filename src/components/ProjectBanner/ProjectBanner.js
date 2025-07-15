@@ -89,11 +89,24 @@ export default function ProjectBanner({ project }) {
         }
 
        .gradient-text {
-          background: linear-gradient(...);
+          background: linear-gradient(
+            270deg,
+            rgba(255, 255, 255, 1),
+            rgba(255, 156, 79, 0.6),
+            rgba(255, 255, 255, 1)
+          );
           background-size: 300% 300%;
           -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: #ffffff;
           animation: gradient-x 6s ease infinite;
+        }
+
+        /* Solo navegadores compatibles */
+        @supports (-webkit-background-clip: text) {
+          .gradient-text {
+            -webkit-text-fill-color: transparent;
+          }
         }
 
 
