@@ -23,10 +23,13 @@
     --foreground: #ededed;
   }
 }
+:root {
+  color-scheme: light;
+}
+
 html, body {
   overflow-x: hidden;
   margin: 0; padding:0; 
-  color-scheme: light;
   
 }
 
