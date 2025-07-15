@@ -169,7 +169,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
           as="h3"
           className={`font-semibold text-white/60 leading-[0.9] text-[1.7rem] md:text-[1rem] ${gradientesTexto[index % 2]} drop-shadow-[0_1px_2px_rgba(0,0,0,0.10)]`}
           loop={false}
-          speed={80}
+          speed={180}
         />
         {mode !== "items" && item.description && (
           <TypewriterTitle
@@ -179,6 +179,7 @@ function ItemCard({ item, index, mode, gradientesTexto }) {
               mode === "portfolio" ? "font-light" : "font-normal"
             } text-white/80 leading-[1] text-lg md:text-sm drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]`}
             loop={false}
+            speed={180}
           />
         )}
       </div>

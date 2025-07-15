@@ -5,7 +5,7 @@ import { TypewriterTitle } from "@/helpers/TypewriterEfect";
 import ItemsListGrid from "@/components/itemsListGrid/ItemsListGrid";
 import { PortfolioSectionGrid } from "@/components/PortfolioSectionGrid/PortfolioSectionGrid";
 import { FAQContactSection } from "@/components/FaqContactSection/FaqContactSection";
-import { ModelServicesItems } from "@/data/dataModels";
+import { ModelDetailServicesItems, ModelServicesItems } from "@/data/dataModels";
 import SuperBanner from "@/components/SuperBanner/SuperBanner";
 
 const geistSans = Geist({
@@ -80,7 +80,7 @@ export default function Services() {
       </main>
 
       {/* Sección de servicios */}
-      <ItemsListGrid mode='servicios' items={servicesCardsItems} />
+      <ItemsListGrid mode='servicios' items={ModelDetailServicesItems} />
       <ItemsListGrid mode='portfolio' items={portfolioCardsItems} />
       <FAQContactSection faqs={myFaqs} />
 
