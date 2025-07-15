@@ -75,65 +75,7 @@ export default function ProjectBanner({ project }) {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes gradient-x {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-
-       .gradient-text {
-          background: linear-gradient(
-            270deg,
-            rgba(255, 255, 255, 1),
-            rgba(255, 156, 79, 0.6),
-            rgba(255, 255, 255, 1)
-          );
-          background-size: 300% 300%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: #ffffff;
-          animation: gradient-x 6s ease infinite;
-        }
-
-        /* Solo navegadores compatibles */
-        @supports (-webkit-background-clip: text) {
-          .gradient-text {
-            -webkit-text-fill-color: transparent;
-          }
-        }
-
-
-        .gradient-button {
-          background: linear-gradient(
-            270deg,
-            rgba(255, 156, 79, 0.3),
-            rgba(255, 156, 79, 0.1),
-            rgba(255, 156, 79, 0.3)
-          );
-          background-size: 300% 300%;
-          animation: gradient-x 8s ease infinite;
-          border: 1px solid rgba(255, 156, 79, 0.3);
-          transition: all 0.3s ease;
-        }
-
-        .gradient-button:hover {
-          background: linear-gradient(
-            270deg,
-            rgba(255, 156, 79, 0.6),
-            rgba(255, 156, 79, 0.3),
-            rgba(255, 156, 79, 0.6)
-          );
-          background-size: 300% 300%;
-          border-color: rgba(255, 156, 79, 0.5);
-        }
-      `}</style>
+   
     </div>
   );
 }
