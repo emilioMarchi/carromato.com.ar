@@ -4,7 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <meta name="color-scheme" content="light dark" /> 
+      <meta name="color-scheme" content="light">
+
       <body className="antialiased">
         <Main />
         <NextScript />
