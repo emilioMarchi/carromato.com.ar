@@ -17,27 +17,8 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-:root {
-  color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  body, html {
-    background-color: inherit !important;
-    color: inherit !important;
-  }
 
-  * {
-    background-color: transparent;
-    color: inherit;
-    filter: none !important;
-  }
-}
+
 
 html, body {
   overflow-x: hidden;
